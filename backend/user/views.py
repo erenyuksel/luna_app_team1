@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 # from django.db.models import Q
 from rest_framework import status
-from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView, get_object_or_404
+from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView
 from rest_framework.response import Response
 
 from user.serializers import UserSerializer, UserRegistrationSerializer, UserMeSerializer
@@ -49,7 +49,7 @@ class CreateUser(CreateAPIView):
                     'Registration code:',
                     f'Welcome to LUNA, this is your Registration Code: {code}',
                     'fullstackluna@gmail.com',
-                    [email,],
+                    [email, ],
                     fail_silently=False,
                 )
                 return Response("Code was generated and sent to your email", status=status.HTTP_200_OK)
@@ -88,4 +88,3 @@ class VeryfiUserView(UpdateAPIView):
             return Response('Invalid verification code', status=status.HTTP_400_BAD_REQUEST)
         except User.DoesNotExist:
             return Response('This User does not exist.', status=status.HTTP_400_BAD_REQUEST)
-
