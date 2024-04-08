@@ -12,13 +12,14 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { setListFilter, setSearchText } from '../../store/slices/listFilter'
 import { useState } from 'react'
+import { SimpleButton } from '../../styles/index.jsx'
 
 const SearchBar = () => {
   const dispatch = useDispatch()
   const selectedFilter = useSelector((store) => store.listFilter.filter)
   const [searchInput, setSearchInput] = useState('')
 
-  const filters = ['Search']
+  const filters = [<SimpleButton>Search</SimpleButton>]
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -32,7 +33,7 @@ const SearchBar = () => {
           <SearchIcon src={icon_search} />
           <SearchInput
             type="text"
-            placeholder="Search.."
+            placeholder="Search..."
             onChange={(e) => setSearchInput(e.target.value)}
           />
         </ContainerWrapperLeft>
