@@ -1,11 +1,22 @@
-import React from 'react'
-import { SectionContainer } from '../../styles'
+import {Cover, UserSectionContainer, ProfilePictureIcon} from "./styles"
+
+
 
 function Profile() {
   return (
-    <SectionContainer>
-      <h1>Profile Page</h1>
-    </SectionContainer>
+    <div>
+      <Cover />
+      <UserSectionContainer>
+      <div id="userinfo">
+      <ProfilePictureIcon
+          loading="lazy"
+          alt=""
+          src="../../assets/profile_picture.png" />
+      <h1>User Page</h1>
+      </div>
+      </UserSectionContainer>
+      </div>
+  
   )
 }
 
