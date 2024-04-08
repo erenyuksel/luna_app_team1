@@ -17,6 +17,10 @@ export const NavLinks = styled.div`
   display: flex;
   justify-content: space-around;
   gap: 2rem;
+
+  @media (max-width: 788px) {
+    display: none;
+  }
 `
 
 export const NavGroupLink = styled(NavLink)`
@@ -26,10 +30,6 @@ export const NavGroupLink = styled(NavLink)`
   justify-content: space-around;
   gap: 0.8rem;
   text-decoration: none;
-
-  @media (max-width: 788px) {
-    display: none;
-  }
 `
 
 export const NavGroupLogo = styled(NavLink)`
@@ -61,16 +61,9 @@ export const NavItemText = styled.h4`
   min-width: max-content;
   font-weight: 500;
   color: #333;
-  &:hover{
+  &:hover {
     color: var(--orange);
   }
-`
-
-export const NavItemIcon = styled.img`
-  aspect-ratio: 1/1;
-  line-height: 1;
-  width: 1.2rem;
-  height: 1.2rem;
 `
 
 export const LinkLikeButton = styled(NavLink)`
