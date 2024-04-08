@@ -10,13 +10,17 @@ export const HeaderContainer = styled.header`
   align-items: center;
   background-color: white;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-  gap: 2rem;
+  gap: 3rem;
 `
 
 export const NavLinks = styled.div`
   display: flex;
   justify-content: space-around;
   gap: 2rem;
+
+  @media (max-width: 788px) {
+    display: none;
+  }
 `
 
 export const NavGroupLink = styled(NavLink)`
@@ -26,10 +30,6 @@ export const NavGroupLink = styled(NavLink)`
   justify-content: space-around;
   gap: 0.8rem;
   text-decoration: none;
-
-  @media (max-width: 788px) {
-    display: none;
-  }
 `
 
 export const NavGroupLogo = styled(NavLink)`
@@ -40,33 +40,30 @@ export const NavGroupLogo = styled(NavLink)`
   gap: 0.8rem;
   text-decoration: none;
 
-  margin-right: 4rem;
+  margin-right: auto;
 `
 
 export const NavLogoText = styled.h1`
   color: black;
   font-size: 1.4rem;
-  font-weight: 400;
+  font-weight: 700;
   text-decoration: none;
 `
 
 export const NavLogoIcon = styled.img`
-  width: 1.4rem;
-  height: 1.4rem;
+  width: 1.8rem;
+  height: 1.8rem;
 `
 
 export const NavItemText = styled.h4`
   display: block;
+  text-align: center;
   min-width: max-content;
-  font-weight: 400;
+  font-weight: 500;
   color: #333;
-`
-
-export const NavItemIcon = styled.img`
-  aspect-ratio: 1/1;
-  line-height: 1;
-  width: 1.2rem;
-  height: 1.2rem;
+  &:hover {
+    color: var(--orange);
+  }
 `
 
 export const LinkLikeButton = styled(NavLink)`
@@ -77,6 +74,7 @@ export const LinkLikeButton = styled(NavLink)`
   border-radius: 3rem;
 
   cursor: pointer;
+  font-size: 0.8rem;
   text-transform: uppercase;
   background: var(--orange);
   color: var(--white);
@@ -100,6 +98,7 @@ export const LinkLikeButton = styled(NavLink)`
 export const NavLeftButton = styled(LinkLikeButton)`
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+  margin-right: 1px;
 `
 export const NavRightButton = styled(LinkLikeButton)`
   border-top-left-radius: 0;
