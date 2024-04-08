@@ -27,7 +27,11 @@ export const GlobalStyle = createGlobalStyle`
 
   #root {
     width: 100%;
-    min-height: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: left
   } 
 
   body {
@@ -37,9 +41,10 @@ export const GlobalStyle = createGlobalStyle`
   }
 `
 
-export const Container = styled.div`
-  max-width: 80%;
-  margin: 0 auto;
+export const MainContainer = styled.main`
+width: 100%;
+  height: 100% !important;
+  margin: auto auto;
 `
 
 export const SectionContainer = styled.section`

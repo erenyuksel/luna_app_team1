@@ -1,11 +1,13 @@
 import React from 'react'
-import { SectionContainer } from '../../styles'
+import { MainContainer, SectionContainer } from '../../styles'
 
 function Profile() {
   return (
-    <SectionContainer>
-      <h1>Profile Page</h1>
-    </SectionContainer>
+    <MainContainer>
+      <SectionContainer>
+        <h1>Profile Page</h1>
+      </SectionContainer>
+    </MainContainer>
   )
 }
 
