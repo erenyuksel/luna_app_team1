@@ -27,7 +27,7 @@ export const GlobalStyle = createGlobalStyle`
 
   #root {
     width: 100%;
-    min-height: 80%;
+    min-height: 100%;
   } 
 
   body {
@@ -64,10 +64,14 @@ export const BaseDiv = styled.div`
 `
 
 export const DivWithLine = styled(BaseDiv)`
-  border-top: 3px solid var(--orange);
+  border-top: 5px solid var(--orange);
   border-top-right-radius: 3px;
   border-top-left-radius: 3px; 
 `
+
+export const DivWithShadow = styled(BaseDiv)`
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+`;
 
 export const BaseArticle = styled.article`
   display: flex;
@@ -79,7 +83,7 @@ export const BaseArticle = styled.article`
 `
 
 export const ButtonBase = styled.button`
-  padding: 1rem 2rem;
+  padding: 0.6rem 1.8rem;
   border-radius: 3rem;
   cursor: pointer;
   text-transform: uppercase;

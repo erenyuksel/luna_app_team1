@@ -1,3 +1,4 @@
+import Header from '../../components/Header'
 import {
   BaseArticle,
   DivWithLine,
@@ -8,6 +9,7 @@ import {
 
 const HomePage = () => {
   return (
+    <>
     <SectionContainer>
       <h1>Home Page</h1>
       <SimpleButton>Try me!</SimpleButton>
@@ -25,6 +27,7 @@ const HomePage = () => {
         <BaseArticle>Base article element</BaseArticle>
       </GridContainer>
     </SectionContainer>
+    </>
   )
 }
 export default HomePage
