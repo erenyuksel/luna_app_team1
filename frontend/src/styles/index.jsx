@@ -10,6 +10,7 @@ export const GlobalStyle = createGlobalStyle`
   --white: #fff;
   --orange: #E47D31;
   --gray: whitesmoke;
+  --dark-gray: #aaa;
 }
 
   * {
@@ -20,14 +21,14 @@ export const GlobalStyle = createGlobalStyle`
 
   html, body {
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
     font-family: 'Roboto', 'Open Sans', sans-serif;
     line-height: 1.5;
   }
 
   #root {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -39,11 +40,23 @@ export const GlobalStyle = createGlobalStyle`
     justify-content: center;
     background-color: var(--gray);
   }
+
+  a {
+    text-decoration: none;
+  }
+`
+
+export const Cover = styled.div`
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  background-size: cover;
+  background-position: center;
 `
 
 export const MainContainer = styled.main`
-width: 100%;
-  height: 100% !important;
+  width: 100%;
+  height: 100%;
   margin: auto auto;
 `
 
@@ -55,9 +68,14 @@ export const SectionContainer = styled.section`
 `
 
 export const GridContainer = styled.div`
+  margin: 2rem auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+  gap: 1.5rem;
+
+  @media (max-width: 788px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `
 
 // Divs used in User and Feed
@@ -71,7 +89,7 @@ export const BaseDiv = styled.div`
 export const DivWithLine = styled(BaseDiv)`
   border-top: 5px solid var(--orange);
   border-top-right-radius: 3px;
-  border-top-left-radius: 3px; 
+  border-top-left-radius: 3px;
 `
 
 export const DivWithBottomLine = styled(BaseDiv)`
@@ -89,7 +107,7 @@ export const DivWithBottomLine = styled(BaseDiv)`
 
 export const DivWithShadow = styled(BaseDiv)`
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-`;
+`
 
 export const BaseArticle = styled.article`
   display: flex;
@@ -126,4 +144,19 @@ export const SimpleButton = styled(ButtonBase)`
     background-color: var(--white);
     color: var(--orange);
   }
-`;
+`
+
+export const InputBase = styled.input`
+  padding: 0.6rem;
+  border: 1px solid var(--dark-gray);
+  border-radius: 3px;
+
+  font-size: 1rem;
+
+  &:focus,
+  &:focus-visible {
+    background-color: var(--gray);
+    border: 1px solid var(--dark-gray);
+    outline: 2px solid var(--orange);
+  }
+`
