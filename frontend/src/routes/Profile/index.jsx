@@ -1,12 +1,12 @@
 import React from 'react'
 import { SectionContainer } from '../../styles'
 
-function Search() {
+function Profile() {
   return (
     <SectionContainer>
-      <h1>Search Page</h1>
+      <h1>Profile Page</h1>
     </SectionContainer>
   )
 }
 
-export default Search
+export default Profile
