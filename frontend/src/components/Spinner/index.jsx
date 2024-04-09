@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { GlobalStyle } from '../../styles'
 
+
+//Styling, didn't move to different file, because it's not that much
 const LoadingSpinnerContainer = styled.div`
   display: flex;
   justify-content: center;

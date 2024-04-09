@@ -9,6 +9,8 @@ import ProfileNav from "../../components/UserComponent/ProfileNav"
 
 
 
+
+
 function Profile() {
   return (
      <MainContainer>
@@ -33,9 +35,15 @@ function Profile() {
       </div>
         
       <div>
+
       
       <ProfileData/>
       </div>  
+
+      <div>
+      
+
+      </div>
       
       </UserGridContainer> 
     </MainContainer>
