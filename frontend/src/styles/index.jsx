@@ -92,6 +92,19 @@ export const DivWithLine = styled(BaseDiv)`
   border-top-left-radius: 3px;
 `
 
+export const DivWithBottomLine = styled(BaseDiv)`
+  border-bottom: 5px solid var(--orange);
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  display: flex;
+  justify-content: center;
+  height: 3rem;
+  width: 5rem;
+  background: transparent;
+  color: #00000088;
+  font-weight: 700;
+`
+
 export const DivWithShadow = styled(BaseDiv)`
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 `
