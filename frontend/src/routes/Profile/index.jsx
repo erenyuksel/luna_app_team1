@@ -1,45 +1,33 @@
-import {UserCover, UserSectionContainer, ProfilePictureIcon, UserGridContainer, UserWrapper} from "./styles"
-import { MainContainer} from "../../styles"
-import profilepic from "../../assets/images/profile_picture.png"
-import ProfileData from "../../components/UserComponent/UserInfo"
-import UserReviews from "../../components/UserComponent/Reviews"
-import ProfileNav from "../../components/UserComponent/ProfileNav"
-
-
-
-
+import {
+  UserCover,
+  UserGridContainer,
+  ProfilePicture,
+  UserPhotoNav,
+} from './styles'
+import { MainContainer, SectionContainer } from '../../styles'
+import profilepic from '../../assets/images/profile_picture.png'
+import UserReviews from './Elements/Reviews'
+import ProfileNav from './Elements/ProfileNav'
+import ProfileData from './Elements/ProfileData'
+import UserInfoStatistics from './Elements/ProfileData/UserStatistics'
 
 function Profile() {
   return (
-     <MainContainer>
+    <MainContainer>
+      <UserCover />
+
       <UserGridContainer>
-      
-      <UserSectionContainer>
-        <UserCover />
-      
-        <ProfilePictureIcon
-          alt="profilepic"
-          src= {profilepic}
-  />      
-      </UserSectionContainer>
-      
-      
-      <div>
-        <ProfileNav/>
-      </div>
-      
-      <div>
-        <UserReviews/>
-      </div>
-        
-      <div>
-      
-      <ProfileData/>
-      </div>  
-      
-      </UserGridContainer> 
+        <UserPhotoNav>
+          <ProfilePicture alt="profilepic" src={profilepic} />
+          <ProfileNav />
+        </UserPhotoNav>
+
+        <UserInfoStatistics />
+        <UserReviews />
+
+        <ProfileData />
+      </UserGridContainer>
     </MainContainer>
-  
   )
 }
 

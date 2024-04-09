@@ -1,23 +1,21 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const StyledUl = styled.ul`
   list-style-type: none;
-  margin: 0;
-  padding: 0;
-  width: 200px;
-  background-color: #f1f1f1;
-`;
+  width: 100%;
+`
 
 export const StyledLi = styled.li`
   a {
     display: block;
     color: #000;
-    padding: 8px 16px;
+    padding: 0.4rem 0.8rem;
     text-decoration: none;
+    min-width: 180px;
   }
 
   a:hover {
-    background-color: #555;
+    background-color: var(--dark-gray);
     color: white;
   }
-`;
+`
