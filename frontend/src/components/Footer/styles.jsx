@@ -13,6 +13,7 @@ export const FooterContainer = styled.footer`
 `
 
 export const FooterMainContainer = styled.div`
+  max-width: 1240px;
   width: 100%;
   padding: 1rem 3rem;
   display: flex;
@@ -63,6 +64,8 @@ export const FooterSocialButton = styled.div`
 `
 
 export const FooterCopyright = styled.div`
+  max-width: 1240px;
+
   width: 100%;
   padding: 0.5rem 3rem 1rem 3rem;
   border-top: 1px solid var(--gray);

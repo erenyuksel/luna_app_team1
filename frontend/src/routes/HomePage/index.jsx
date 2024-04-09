@@ -7,8 +7,8 @@ import {
   SectionContainer,
   SimpleButton,
 } from '../../styles'
-import RestaurantCard from './Contents/RestaurantCard'
-import RestauranCard from './Contents/RestaurantCard'
+import RestaurantCard from '../Search/Restaurants/RestaurantCard'
+import RestauranCard from '../Search/Restaurants/RestaurantCard'
 import { HomePageCover, HomePageCoverSearch } from './styles'
 
 const HomePage = () => {

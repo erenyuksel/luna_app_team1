@@ -70,11 +70,20 @@ export const SectionContainer = styled.section`
 export const GridContainer = styled.div`
   margin: 2rem auto;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr); 
   gap: 1.5rem;
 
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 1rem;
+  }
+
   @media (max-width: 788px) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr); 
+  }
+
+  @media (max-width: 500px) { 
+    grid-template-columns: 1fr;
   }
 `
 
