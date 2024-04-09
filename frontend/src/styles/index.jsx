@@ -65,24 +65,32 @@ export const SectionContainer = styled.section`
   margin: 0 auto;
 
   padding: 1rem 3rem;
+
+  @media (max-width: 788px) {
+    padding: 1rem 2rem;
+  }
+
+  @media (max-width: 500px) {
+    padding: 1rem 1rem;
+  }
 `
 
 export const GridContainer = styled.div`
   margin: 2rem auto;
   display: grid;
-  grid-template-columns: repeat(4, 1fr); 
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
 
   @media (max-width: 1024px) {
-    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
   }
 
   @media (max-width: 788px) {
-    grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (max-width: 500px) { 
+  @media (max-width: 500px) {
     grid-template-columns: 1fr;
   }
 `
