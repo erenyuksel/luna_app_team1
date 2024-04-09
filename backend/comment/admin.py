@@ -9,6 +9,3 @@ from comment.models import Comment
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('user', "review", "text_content", "date_created", "date_modified")
     search_fields = ('user__username', 'review__id', 'text_content',)
-
-
-

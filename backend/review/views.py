@@ -1,8 +1,7 @@
-# from django.shortcuts import render
 #
-from rest_framework.exceptions import NotFound, PermissionDenied
-from rest_framework.generics import CreateAPIView, ListCreateAPIView, ListAPIView, RetrieveUpdateAPIView, \
-    DestroyAPIView, RetrieveUpdateDestroyAPIView
+#
+from rest_framework.exceptions import NotFound
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 
 from restaurant.models import Restaurant
