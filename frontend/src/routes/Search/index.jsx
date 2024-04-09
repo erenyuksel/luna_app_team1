@@ -1,11 +1,19 @@
 import React from 'react'
-import { SectionContainer } from '../../styles'
+import { MainContainer, SectionContainer } from '../../styles'
+import UsersList from './Users'
+import ReviewsList from './Reviews'
 
 function Search() {
   return (
-    <SectionContainer>
-      <h1>Search Page</h1>
-    </SectionContainer>
+    <MainContainer>
+      <SectionContainer>
+        <h1>Sample Users</h1>
+        <UsersList />
+        <h1>Sample Reviews</h1>
+        <ReviewsList />
+
+      </SectionContainer>
+    </MainContainer>
   )
 }
 

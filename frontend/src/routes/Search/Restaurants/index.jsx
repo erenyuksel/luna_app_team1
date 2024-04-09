@@ -1,6 +1,6 @@
 import React from 'react'
 
-function UserCard() {
+function RestaurantsList() {
   return (
     <div>
       
@@ -8,4 +8,4 @@ function UserCard() {
   )
 }
 
-export default UserCard
+export default RestaurantsList

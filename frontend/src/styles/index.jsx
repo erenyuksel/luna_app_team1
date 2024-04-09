@@ -32,7 +32,7 @@ export const GlobalStyle = createGlobalStyle`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: left
+    align-items: left;
   } 
 
   body {
@@ -65,6 +65,14 @@ export const SectionContainer = styled.section`
   margin: 0 auto;
 
   padding: 1rem 3rem;
+
+  @media (max-width: 788px) {
+    padding: 1rem 2rem;
+  }
+
+  @media (max-width: 500px) {
+    padding: 1rem 1rem;
+  }
 `
 
 export const GridContainer = styled.div`
@@ -73,8 +81,17 @@ export const GridContainer = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
 
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
   @media (max-width: 788px) {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 500px) {
+    grid-template-columns: 1fr;
   }
 `
 
@@ -125,14 +142,9 @@ export const ButtonBase = styled.button`
   text-transform: uppercase;
   min-width: max-content;
 
+  &:focus,
   &:focus-visible {
-    outline: 2px solid black;
-    color: white;
-  }
-
-  &:focus {
-    outline: 2px solid black;
-    color: white;
+    outline: 2px solid lightgreen;
   }
 `
 export const SimpleButton = styled(ButtonBase)`
@@ -144,19 +156,23 @@ export const SimpleButton = styled(ButtonBase)`
     background-color: var(--white);
     color: var(--orange);
   }
+  &:active {
+    color: var(--orange);
+  }
 `
 
 export const InputBase = styled.input`
   padding: 0.6rem;
   border: 1px solid var(--dark-gray);
+  background-color: var(--gray);
   border-radius: 3px;
 
   font-size: 1rem;
 
   &:focus,
   &:focus-visible {
-    background-color: var(--gray);
-    border: 1px solid var(--dark-gray);
-    outline: 2px solid var(--orange);
+    border: 1px solid var(--orange);
+    outline: 2px solid salmon;
+    color: var(--orange);
   }
 `

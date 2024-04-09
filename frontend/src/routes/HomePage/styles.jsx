@@ -11,6 +11,7 @@ export const HomePageCover = styled(Cover)`
 `
 
 export const HomePageCoverSearch = styled.form`
+  width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
