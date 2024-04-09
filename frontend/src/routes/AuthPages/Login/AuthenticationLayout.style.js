@@ -4,27 +4,40 @@ export const SignInHeader = styled.header`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width: 50rem;
+  width: 100%;
+  max-width: 50rem;
   border: 1px red solid;
   gap: 2rem;
   font-size: 0.8rem;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+    padding: 1rem;
+  }
 `
 
 export const AuthFormContainer = styled.div`
-  height: 50rem;
-  width: 50rem;
+  height: 100vh;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    height: auto;
+    padding: 2rem 1rem;
+  }
 `
 
 export const AuthForm = styled.form`
-  width: 25rem;
-  height: 25rem;
+  width: 100%;
+  max-width: 25rem;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
 
   .input-container {
     flex: 1;
@@ -34,17 +47,16 @@ export const AuthForm = styled.form`
     grid-template-columns: 1fr;
     gap: 2rem;
   }
-`
-export const FormTitle = styled.h2`
-  font-size: 2.5rem;
-  font-weight: 500;
-  text-align: center;
-  margin-bottom: 1em;
-  grid-column: 1/-1;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 100%;
+  }
 `
 
 export const InputFieldContainer = styled.div`
   width: 20rem;
+  max-width: 20rem;
 
   label {
     text-transform: capitalize;
@@ -72,6 +84,11 @@ export const InputFieldContainer = styled.div`
       color: gray;
       font-weight: 700;
     }
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 100%;
   }
 `
 export const ConfirmationText = styled.p`
