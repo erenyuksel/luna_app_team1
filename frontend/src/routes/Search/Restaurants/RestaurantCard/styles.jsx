@@ -19,3 +19,13 @@ export const RestInfo = styled.div`
     flex-direction: column;
     gap: 0.5rem;
 `
+
+export const RestRaitingContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+`
+
+export const RestInfoAdress = styled.div`
+    font-size: 0.9rem;
+`

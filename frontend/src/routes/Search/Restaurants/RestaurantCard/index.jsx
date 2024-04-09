@@ -1,6 +1,12 @@
 import React from 'react'
 import { BaseArticle, DivWithLine } from '../../../../styles'
-import { ImageWrapper, RestInfo, RestPhoto } from './styles'
+import {
+  ImageWrapper,
+  RestInfo,
+  RestInfoAdress,
+  RestPhoto,
+  RestRaitingContainer,
+} from './styles'
 
 function RestaurantCard({
   name,
@@ -14,10 +20,11 @@ function RestaurantCard({
       <BaseArticle>
         <RestInfo>
           <h3>{name}</h3>
-          <p>{address}</p>
-          <p>
-            Rating: {averageRating} ({reviewsCount} reviews)
-          </p>
+          <RestInfoAdress>{address}</RestInfoAdress>
+          <RestRaitingContainer>
+            <div>Rating: {averageRating}</div> 
+            <div>({reviewsCount} reviews)</div>
+          </RestRaitingContainer>
         </RestInfo>
         <ImageWrapper>
           <RestPhoto src={imageUrl} alt={name}></RestPhoto>
