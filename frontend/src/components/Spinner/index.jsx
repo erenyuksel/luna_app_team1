@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { GlobalStyle } from '../../styles'
+
 
 
 //Styling, didn't move to different file, because it's not that much
@@ -11,7 +11,7 @@ const LoadingSpinnerContainer = styled.div`
   width: 100%;
 
   .loading-spinner {
-    border: 8px solid --var();
+    border: 8px solid #a5a2a0;
     border-top: 8px solid #E47D31;
     border-radius: 50%;
     width: 50px;
