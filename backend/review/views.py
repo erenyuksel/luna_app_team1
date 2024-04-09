@@ -4,7 +4,6 @@ from django.db.models import Q
 from rest_framework import status
 from rest_framework.exceptions import NotFound
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView, get_object_or_404
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from restaurant.models import Restaurant
@@ -27,7 +26,6 @@ class SearchReviewView(ListAPIView):
 class CreateReviewView(CreateAPIView):
     serializer_class = ReviewSerializer
     queryset = Review.objects.all()
-
 
     def perform_create(self, serializer):
         restaurant_id = self.kwargs['restaurant_id']

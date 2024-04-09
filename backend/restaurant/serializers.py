@@ -1,14 +1,12 @@
 from rest_framework import serializers
 
-from user.serializers import UserSerializer
 from .models import Restaurant, Categories
 
 
 class CategoriesSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Categories
-        fields = ['name',]
+        fields = ['name', ]
 
 
 class RestaurantSerializer(serializers.ModelSerializer):

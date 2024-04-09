@@ -1,6 +1,5 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.db.models import Avg
 
 User = get_user_model()
 
@@ -24,6 +23,7 @@ PRICE_LEVEL = {
     3: '$$$'
 }
 
+
 class Categories(models.Model):
     name = models.CharField(max_length=20)
 
@@ -32,6 +32,7 @@ class Categories(models.Model):
 
     def __repr__(self):
         return self.name
+
 
 class Restaurant(models.Model):
     name = models.CharField(max_length=100, blank=False)
@@ -47,6 +48,7 @@ class Restaurant(models.Model):
     price_level = models.IntegerField(blank=False, choices=PRICE_LEVEL)
     image = models.ImageField(upload_to='restaurant_directory_path', blank=True)
     category = models.ForeignKey(Categories, related_name='restaurants', on_delete=models.DO_NOTHING)
+
     # category = models.IntegerField(choices=CATEGORY_CHOICES, blank=False)
 
     @property
@@ -59,12 +61,7 @@ class Restaurant(models.Model):
         avg = sum(ratings) / len(ratings)
         return avg
 
-
         # return self.reviews.aggregate(Avg('rating_stars')).get('rating__avg') or 0.0
-
 
     def __str__(self):
         return self.name
-
-
-

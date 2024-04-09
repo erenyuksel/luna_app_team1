@@ -1,7 +1,5 @@
 from django.contrib.auth import get_user_model
-from rest_framework import viewsets
-from rest_framework.generics import ListCreateAPIView, DestroyAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView, \
-    ListAPIView
+from rest_framework.generics import DestroyAPIView, CreateAPIView, ListAPIView
 from rest_framework.permissions import IsAuthenticated
 
 from comment.models import Comment
@@ -43,4 +41,3 @@ class DeleteCommentView(DestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = [IsAuthor]
-
