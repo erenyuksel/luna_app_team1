@@ -6,10 +6,10 @@ import {
 } from './styles'
 import { MainContainer, SectionContainer } from '../../styles'
 import profilepic from '../../assets/images/profile_picture.png'
-import UserReviews from './Elements/Reviews'
 import ProfileNav from './Elements/ProfileNav'
 import ProfileData from './Elements/ProfileData'
 import UserInfoStatistics from './Elements/ProfileData/UserStatistics'
+import { Outlet } from 'react-router-dom'
 
 function Profile() {
   return (
@@ -23,7 +23,8 @@ function Profile() {
         </UserPhotoNav>
 
         <UserInfoStatistics />
-        <UserReviews />
+        {/* <UserReviews /> */}
+        <Outlet />
 
         <ProfileData />
       </UserGridContainer>

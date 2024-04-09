@@ -1,16 +1,5 @@
 import styled from 'styled-components'
 
-export const ReviewsSection = styled.section`
-  background-color: var(--white);
-
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  padding: 1rem;
-
-  grid-area: reviews;
-`
 
 export const ReviewCard = styled.article`
   display: flex;
