@@ -21,13 +21,13 @@ function ProfileData() {
       <h3>Location</h3>
       <p>{data.location}</p>
 
-      <h3>Luna member since</h3>
+      <h4>Luna member since</h4>
       <p>{data.lunamember}</p>
 
-      <h3>Things I love</h3>
+      <h4>Things I love</h4>
       <p>{data.thins_i_love}</p>
 
-      <h3>Description</h3>
+      <h4>Description</h4>
       <p>{data.description}</p>
       
 

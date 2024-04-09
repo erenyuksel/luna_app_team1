@@ -1,4 +1,4 @@
-import {UserCover, UserSectionContainer, ProfilePictureIcon, UserGridContainer, UserWrapper} from "./styles"
+import {UserCover, UserSectionContainer, ProfilePictureIcon, UserGridContainer} from "./styles"
 import { MainContainer} from "../../styles"
 import profilepic from "../../assets/images/profile_picture.png"
 import ProfileData from "../../components/UserComponent/UserInfo"

@@ -4,7 +4,7 @@ export const StyledUl = styled.ul`
   list-style-type: none;
   margin: 0;
   padding: 0;
-  width: 200px;
+  width: 1,5rem;
   background-color: #f1f1f1;
 `;
 

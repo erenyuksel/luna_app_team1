@@ -25,14 +25,16 @@ grid-template-columns: 0.7fr 1.8fr 0.5fr;
   grid-template-areas: 
     "Picture Picture Picture"
     "NavProfile Reviews UserInfo"
-    ". . ."; 
+    ". . . "; 
+    margin-top: 20%;
+    
 
 .NavProfile { grid-area: NavProfile; }
 .Reviews { grid-area: Reviews; }
 .UserInfo { grid-area: UserInfo; }
 .cover { grid-area: Picture; }
  
-margin-top: 20%;
+
 
 `;
 
