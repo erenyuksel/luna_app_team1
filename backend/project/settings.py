@@ -53,6 +53,10 @@ INSTALLED_APPS = [
     # Our apps:
     'user',
     'registration_profile',
+    "comment",
+    "restaurant",
+    "review",
+
 
     'drf_yasg',
     'rest_framework',
