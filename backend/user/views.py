@@ -1,10 +1,13 @@
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
+from django.db.models import Q
 # from django.db.models import Q
 from rest_framework import status
-from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
+from user.permissions import IsSelf
 from user.serializers import UserSerializer, UserRegistrationSerializer, UserMeSerializer
 
 User = get_user_model()
@@ -24,11 +27,26 @@ class GetUserView(ListAPIView):
         return User.objects.filter(id=self.kwargs['pk'])
 
 
-class UserMeView(ListAPIView):
-    serializer_class = UserMeSerializer
+class FindUserView(ListAPIView):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
 
     def get_queryset(self):
-        return User.objects.filter(id=self.request.user.id)
+        search_query = self.request.query_params.get('search')
+        if search_query != '':
+            return User.objects.filter(Q(first_name__icontains=search_query) |
+                                        Q(last_name__icontains=search_query) |
+                                        Q(email__icontains=search_query))
+        return User.objects.all()
+
+
+class UserMeView(RetrieveUpdateDestroyAPIView):
+    serializer_class = UserMeSerializer
+    permission_classes = [IsSelf]
+    queryset = User.objects.all()
+
+    # def get_queryset(self):
+    #     return User.objects.filter(id=self.request.user.id)
 
 
 class CreateUser(CreateAPIView):
@@ -88,3 +106,5 @@ class VeryfiUserView(UpdateAPIView):
             return Response('Invalid verification code', status=status.HTTP_400_BAD_REQUEST)
         except User.DoesNotExist:
             return Response('This User does not exist.', status=status.HTTP_400_BAD_REQUEST)
+
+
