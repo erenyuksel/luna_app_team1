@@ -28,8 +28,8 @@ class Restaurant(models.Model):
     website = models.URLField
     phone = models.CharField(max_length=15, blank=False, null=True)
     email = models.EmailField(max_length=100, unique=True)
-    opening_hours = models.IntegerField(max_length=15, blank=False, null=True)
-    price_level = models.IntegerField(max_length=15, blank=False, null=True)
+    opening_hours = models.IntegerField(blank=False, null=True)
+    price_level = models.IntegerField(blank=False, null=True)
     image = models.ImageField(upload_to='restaurant_directory_path')
 
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, blank=False)
