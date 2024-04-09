@@ -1,3 +1,11 @@
 # from django.contrib import admin
 #
-# # Register your models here.
+from django.contrib import admin
+
+from review.models import Review
+
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ["restaurant", 'user', "text_content","rating_stars"]
+    fields = ["restaurant", 'user',"text_content", 'rating_stars']
