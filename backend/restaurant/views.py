@@ -78,7 +78,6 @@ class FourBestRestaurantsView(ListAPIView):
         products_with_ratings = Restaurant.objects.annotate(average_rating=Avg('reviews__rating_stars'))
         return products_with_ratings.order_by('average_rating')[:4]
 
-
     # def get_queryset(self):
     #     search_query = self.request.query_params.get('search')
     #     if search_query:
