@@ -17,16 +17,24 @@ const ProfileNav = () => {
             : ''
         }
       >
-        <Link to="/profile">Reviews</Link>
+        <Link to="/profile">
+          <i className="lar la-star"></i> Reviews
+        </Link>
       </StyledLi>
       <StyledLi isActive={isActive('/profile/comments')}>
-        <Link to="/profile/comments">Comments</Link>
+        <Link to="/profile/comments">
+          <i className="lar la-comments"></i> Comments
+        </Link>
       </StyledLi>
       <StyledLi isActive={isActive('/profile/restaurants')}>
-        <Link to="/profile/restaurants">Restaurants</Link>
+        <Link to="/profile/restaurants">
+          <i className="las la-hamburger"></i> Restaurants
+        </Link>
       </StyledLi>
       <StyledLi isActive={isActive('/profile/edit')}>
-        <Link to="/profile/edit">Edit Profile</Link>
+        <Link to="/profile/edit">
+          <i className="las la-user-edit"></i> Edit Profile
+        </Link>
       </StyledLi>
     </StyledUl>
   )
