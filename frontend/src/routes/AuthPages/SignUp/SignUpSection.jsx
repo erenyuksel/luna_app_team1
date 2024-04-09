@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { DivWithBottomLine, SectionContainer, SimpleButton } from '../../../styles'
 import { useNavigate } from 'react-router-dom'
 import useApiRequest from '../../../axios/useApiRequest'
-import { AuthForm, AuthFormContainer, ErrorMessage, FormTitle, InputFieldContainer } from '../Login/AuthenticationLayout.style'
+import { AuthForm, AuthFormContainer, ErrorMessage, InputFieldContainer } from '../Login/AuthenticationLayout.style'
 
 const SignUp = () => {
 
