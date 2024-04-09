@@ -1,1 +1,1 @@
-import comment.views
+# import comment.views
