@@ -6,18 +6,18 @@ from restaurant.models import Restaurant
 User = get_user_model()
 
 RATING_CHOICES = {
-    "1": "Terrible",
-    "2": "Bad",
-    "3": "Average",
-    "4": "Good",
-    "5": "Excellent",
+    1: 1,
+    2: 2,
+    3: 3,
+    4: 4,
+    5: 5,
 }
 
 
 class Review(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name='reviews')
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    rating_stars = models.CharField(max_length=50, choices=RATING_CHOICES)
+    rating_stars = models.IntegerField(choices=RATING_CHOICES, blank=False)
     text_content = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)

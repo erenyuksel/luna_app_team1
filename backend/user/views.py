@@ -1,3 +1,5 @@
+import random
+
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.db.models import Q
@@ -6,7 +8,9 @@ from rest_framework import status
 from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
+from registration_profile.models import RegistrationProfile
 from user.permissions import IsSelf
 from user.serializers import UserSerializer, UserRegistrationSerializer, UserMeSerializer
 
@@ -17,11 +21,13 @@ User = get_user_model()
 class ListUsersView(ListAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
+    permission_classes = []
 
 
 class GetUserView(ListAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
+    permission_classes = []
 
     def get_queryset(self):
         return User.objects.filter(id=self.kwargs['pk'])
@@ -30,13 +36,14 @@ class GetUserView(ListAPIView):
 class FindUserView(ListAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
+    permission_classes = []
 
     def get_queryset(self):
         search_query = self.request.query_params.get('search')
         if search_query != '':
             return User.objects.filter(Q(first_name__icontains=search_query) |
-                                        Q(last_name__icontains=search_query) |
-                                        Q(email__icontains=search_query))
+                                       Q(last_name__icontains=search_query) |
+                                       Q(email__icontains=search_query))
         return User.objects.all()
 
 
@@ -44,9 +51,6 @@ class UserMeView(RetrieveUpdateDestroyAPIView):
     serializer_class = UserMeSerializer
     permission_classes = [IsSelf]
     queryset = User.objects.all()
-
-    # def get_queryset(self):
-    #     return User.objects.filter(id=self.request.user.id)
 
 
 class CreateUser(CreateAPIView):
@@ -108,3 +112,55 @@ class VeryfiUserView(UpdateAPIView):
             return Response('This User does not exist.', status=status.HTTP_400_BAD_REQUEST)
 
 
+class ResetPassword(CreateAPIView):
+    permission_classes = []
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        code = ''.join(random.choice('0123456789') for _ in range(5))
+        email = request.data.get('email')
+        if User.objects.filter(email=email).exists():
+            user = User.objects.get(email=email)
+            profile = RegistrationProfile.objects.get(user_id=user.id)
+            profile.reset_password_code = code
+            profile.save()
+            send_mail(
+                'Registration code:',
+                f'Use this code to reset your password: {code}',
+                'fullstackluna@gmail.com',
+                [email, ],
+                fail_silently=False,
+            )
+            return Response('Your reset code has been sent')
+        return Response('User does not exist', status=status.HTTP_400_BAD_REQUEST)
+
+
+class ValidateResetPassword(UpdateAPIView):
+    permission_classes = []
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+
+    def patch(self, request, *args, **kwargs):
+        email = request.data.get('email')
+        code = request.data.get('code')
+        password = ''.join(random.choice('0123456789qwertyuiopasdfghjklxcvbnmz') for _ in range(8))
+
+        if User.objects.filter(email=email).exists():
+            user = User.objects.get(email=email)
+            profile = RegistrationProfile.objects.get(user_id=user.id)
+            if profile.reset_password_code == code:
+                profile.reset_password_code = ''
+                profile.save()
+                user.set_password(password)
+                user.save()
+                send_mail(
+                    'Registration code:',
+                    f'This is your new password: {password}',
+                    'fullstackluna@gmail.com',
+                    [email, ],
+                    fail_silently=False,
+                )
+                return Response('Your new password has been sent', status=status.HTTP_200_OK)
+            return Response('Code did not match the sent one', status=status.HTTP_400_BAD_REQUEST)
+        return Response('User does not exist', status=status.HTTP_400_BAD_REQUEST)
