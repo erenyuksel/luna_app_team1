@@ -1,21 +1,28 @@
 import React, { useEffect, useState } from 'react'
-import { BaseArticle, DivWithBottomLine, SectionContainer, SimpleButton } from '../../../styles'
+import {
+  BaseArticle,
+  DivWithBottomLine,
+  SectionContainer,
+  SimpleButton,
+} from '../../../styles'
 import { useDispatch } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
-import { AuthForm, AuthFormContainer, FormTitle, InputFieldContainer } from './AuthenticationLayout.style'
+import {
+  AuthForm,
+  AuthFormContainer,
+  InputFieldContainer,
+} from './AuthenticationLayout.style'
 import useApiRequest from '../../../axios/useApiRequest'
 import CreateAccountProgress from '../AccountProgress/CreateAccountProgress'
 
-
 const Login = () => {
-
-  const [user, setUser] = useState({email: undefined, password: undefined})
+  const [user, setUser] = useState({ email: undefined, password: undefined })
   const navigate = useNavigate()
-  const {sendRequest, data, error} = useApiRequest()
+  const { sendRequest, data, error } = useApiRequest()
   const dispatch = useDispatch()
 
   const handleInput = (e) => {
-    setUser({...user, [e.target.id]: e.target.value})
+    setUser({ ...user, [e.target.id]: e.target.value })
   }
 
   const handleLogin = (e) => {
@@ -24,8 +31,8 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if(data){
-      dispatch(loginUser({user: data.user, accessToken: data.access}))
+    if (data) {
+      dispatch(loginUser({ user: data.user, accessToken: data.access }))
       localStorage.setItem('user', JSON.stringify(data.user))
       localStorage.setItem('auth-token', data.access)
       navigate('/posts')
@@ -89,13 +96,17 @@ const Login = () => {
                     id="password"
                   />
                 </div>
-                {error?.password && <ErrorMessage>{error.password}</ErrorMessage>}
+                {error?.password && (
+                  <ErrorMessage>{error.password}</ErrorMessage>
+                )}
               </InputFieldContainer>
-              {error?.detail && <p className={'error-message'}>{error.detail}</p>}
+              {error?.detail && (
+                <p className={'error-message'}>{error.detail}</p>
+              )}
             </div>
             <div className={'form-footer'}>
               <SimpleButton onClick={handleLogin}>sign in</SimpleButton>
-              <CreateAccountProgress/>
+              <CreateAccountProgress />
             </div>
           </AuthForm>
         </AuthFormContainer>
