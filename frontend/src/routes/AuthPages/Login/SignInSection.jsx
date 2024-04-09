@@ -5,15 +5,17 @@ import {
   SectionContainer,
   SimpleButton,
 } from '../../../styles'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
 import {
   AuthForm,
   AuthFormContainer,
+  CenterIt,
   InputFieldContainer,
-} from './AuthenticationLayout.style'
+} from '../Authentication/AuthenticationLayout.style'
 import useApiRequest from '../../../axios/useApiRequest'
 import CreateAccountProgress from '../AccountProgress/CreateAccountProgress'
+import { loginUser } from '../../../store/slices/loggedInUser'
 
 const Login = () => {
   const [user, setUser] = useState({ email: undefined, password: undefined })
@@ -30,51 +32,30 @@ const Login = () => {
     sendRequest('post', 'auth/token/', user)
   }
 
+  // useEffect(() => {
+  //   isLoggedIn && navigate('/profile');
+  // }, []);
+
   useEffect(() => {
     if (data) {
       dispatch(loginUser({ user: data.user, accessToken: data.access }))
-      localStorage.setItem('user', JSON.stringify(data.user))
+      window.localStorage.setItem('user', JSON.stringify(data.user))
       localStorage.setItem('auth-token', data.access)
-      navigate('/posts')
+      navigate('/')
     }
   }, [data, dispatch, navigate])
-
-  // const onSubmitHandler = async () => {
-  //   setError(null)
-  //   try {
-  //     const res = await AxiosMotion.post('/auth/token/', {
-  //       email,
-  //       password,
-  //     })
-  //     const accessToken = res.data.access
-  //     window.localStorage.setItem('accessToken', accessToken)
-
-  //     dispatch(login_user(accessToken))
-
-  //     const from = location.state?.from || '/posts'
-  //     console.log(from)
-  //     navigate(from)
-  //   } catch (error) {
-  //     setError(error)
-  //   }
-  // }
 
   return (
     <>
       <SectionContainer>
-        {/* <SignInHeader>
-          <p>Don&apos;t have an account?</p>
-          <Link to="/signup">
-            <SimpleButton>sign up</SimpleButton>
-          </Link>
-        </SignInHeader> */}
         <AuthFormContainer>
           <AuthForm onSubmit={handleLogin}>
             <div className={'input-container'}>
-              <DivWithBottomLine>LOGIN</DivWithBottomLine>
+              <CenterIt>
+                <DivWithBottomLine>LOGIN</DivWithBottomLine>
+              </CenterIt>
               <InputFieldContainer>
                 <div className={'input-wrapper'}>
-                  {/* <img src={AvatarIcon}></img> */}
                   <input
                     placeholder="Email"
                     type="email"
@@ -87,7 +68,6 @@ const Login = () => {
               </InputFieldContainer>
               <InputFieldContainer>
                 <div className={'input-wrapper'}>
-                  {/* <img src={PasswordIcon} alt="Password icon "/> */}
                   <input
                     placeholder="Password"
                     type="password"
