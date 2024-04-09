@@ -21,7 +21,7 @@ export const UserGridContainer = styled(SectionContainer)`
 
   grid-template-areas:
     'photonav stats .'
-    'photonav reviews info';
+    'photonav usersmain info';
 
   @media (max-width: 1024px) {
     grid-template-columns: min-content auto;
@@ -30,17 +30,29 @@ export const UserGridContainer = styled(SectionContainer)`
     grid-template-areas:
       'photonav stats'
       'photonav info'
-      '. reviews';
+      '. usersmain';
   }
 
   @media (max-width: 788px) {
     grid-template-areas:
       'photonav stats'
       'photonav stats'
-      'reviews reviews'
+      'usersmain usersmain'
       'info info';
   }
 
+`
+
+export const UserSection = styled.section`
+  background-color: var(--white);
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  padding: 1rem;
+
+  grid-area: usersmain;
 `
 
 export const UserPhotoNav = styled.div`

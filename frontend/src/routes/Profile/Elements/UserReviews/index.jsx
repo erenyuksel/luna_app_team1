@@ -1,11 +1,10 @@
-import { SectionTitle } from '../../styles'
+import { SectionTitle, UserSection } from '../../styles'
 import {
   ReviewCard,
   ReviewDate,
   ReviewDescription,
   ReviewHeader,
   ReviewTitle,
-  ReviewsSection,
 } from './styles'
 
 const reviews = [
@@ -26,7 +25,7 @@ const reviews = [
 
 function UserReviews() {
   return (
-    <ReviewsSection>
+    <UserSection>
       <SectionTitle>Reviews</SectionTitle>
 
       {reviews.map((review, index) => (
@@ -39,7 +38,7 @@ function UserReviews() {
           <ReviewDescription>{review.description}</ReviewDescription>
         </ReviewCard>
       ))}
-    </ReviewsSection>
+    </UserSection>
   )
 }
 export default UserReviews
