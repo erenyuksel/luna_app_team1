@@ -1,10 +1,7 @@
-from django.shortcuts import render
-
 from django.db.models import Q
 from rest_framework.generics import (
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView,
-    get_object_or_404,
     ListAPIView,
 )
 from rest_framework.response import Response
@@ -50,6 +47,3 @@ class RestaurantListByUserView(ListAPIView):
     def get_queryset(self):
         user_id = self.kwargs['user_id']
         return Restaurant.objects.filter(user=user_id).order_by('id')
-
-
-
