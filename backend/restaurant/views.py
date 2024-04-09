@@ -17,12 +17,12 @@ class SearchRestaurantView(ListAPIView):
     permission_classes = []
 
     def get_queryset(self):
-        search_query = self.request.query_params.get('search')
-        if search_query != '':
+        search_query = self.request.query_params.get('search', None)
+        if search_query is not None:
             return Restaurant.objects.filter(Q(name__icontains=search_query) |
                                              Q(country__icontains=search_query) |
                                              Q(city__icontains=search_query) |
-                                             Q(category_display__icontains=search_query))
+                                             Q(category__name__icontains=search_query))
         return Restaurant.objects.all()
 
 

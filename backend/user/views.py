@@ -37,8 +37,8 @@ class FindUserView(ListAPIView):
     permission_classes = []
 
     def get_queryset(self):
-        search_query = self.request.query_params.get('search')
-        if search_query != '':
+        search_query = self.request.query_params.get('search', None)
+        if search_query is not None:
             return User.objects.filter(Q(first_name__icontains=search_query) |
                                        Q(last_name__icontains=search_query) |
                                        Q(email__icontains=search_query))

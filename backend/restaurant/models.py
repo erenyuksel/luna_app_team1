@@ -55,7 +55,12 @@ class Restaurant(models.Model):
 
     @property
     def rating(self):
-        return self.reviews.aggregate(Avg('rating_stars')).get('rating__avg') or 0.0
+        ratings = self.reviews.all().values_list('rating_stars', flat=True)
+        avg = sum(ratings) / len(ratings)
+        return avg
+
+
+        # return self.reviews.aggregate(Avg('rating_stars')).get('rating__avg') or 0.0
 
 
     def __str__(self):
