@@ -1,46 +1,21 @@
 import { SectionContainer, SimpleButton } from '../../../styles'
 import { FaStar } from "react-icons/fa";
 import { useState } from "react";
-import styled from "styled-components";
 
+import { Container, SelectYourRating, StarsContainer, Textarea, ErrorMessage } from './styles'; // Assuming you have imported the styled components correctly
 
 
 const colors = {
-    orange: "#FFBA5A",
-    grey: "#a9a9a9"
-  };
-  
-  const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  `;
-  
-  const StarsContainer = styled.div`
-  align-self: baseline;
-   margin-top: 10rem;
-   display: flex;
-    flex-direction: row;
-  `;
-  
-  const Textarea = styled.textarea`
-    border: 0.0625rem solid #dfdcdc; 
-    padding: 1rem; 
-    margin: 1.25rem 0; 
-    min-height: 15rem; 
-    min-width: 35rem; 
-  
-  `;
-
-  const SelectYourRating = styled.section`
-    font-weight: 200;
-    padding-top: 0.3rem;
-    margin-left: 2rem;
-  `;
+  orange: "#FFBA5A",
+  grey: "#a9a9a9"
+};
 
 const NewReview = () => {
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
+  const [review, setReview] = useState('');
+  const [isReviewValid, setIsReviewValid] = useState(true);
+
   const stars = Array(5).fill(0);
 
   const handleClick = (value) => {
@@ -53,6 +28,23 @@ const NewReview = () => {
 
   const handleMouseLeave = () => {
     setHoverValue(undefined);
+  };
+
+  const handleReviewChange = (event) => {
+    setReview(event.target.value);
+    setIsReviewValid(event.target.value.length >= 50); // Update validity based on length of review
+  };
+
+  const handleSubmit = () => {
+    if (review.length === 0) {
+      alert("Please write a review before submitting.");
+      return;
+    }
+    if (!isReviewValid) {
+      alert("Please write a review with at least 50 characters.");
+      return;
+    }
+    // Perform submission logic here
   };
 
   return (
@@ -80,9 +72,11 @@ const NewReview = () => {
         placeholder="Your review helps others learn about great local businesses.
                      Please don't review this business if you received a freebie for
                     writing this review, or if you're connected in any way to the owner or employees." 
-        minLength={50}
-        required/>
-      <SimpleButton type="button" style={{ alignSelf: 'flex-end' }} >Submit</SimpleButton>
+        value={review}
+        onChange={handleReviewChange}
+      />
+      {!isReviewValid && <ErrorMessage>Review must be at least 50 characters.</ErrorMessage>}
+      <SimpleButton type="button" style={{ alignSelf: 'flex-end' }} onClick={handleSubmit}>Submit</SimpleButton>
     </Container>
     </SectionContainer>
   );
