@@ -8,11 +8,11 @@ import axios from 'axios'
 
 const useApiRequest = axios.create({
   // baseURL: BASE_URL,
-  baseURL: 'https://luna1.propulsion-learn.ch/backend/api'
+  baseURL: 'https://luna1.propulsion-learn.ch/backend/api',
 })
 
 export const getMyProfileData = async (token) => {
-  return await useApiRequest.get('/users/me/', {
+  return await useApiRequest.get('/users/get/me/', {
     headers: {
       Authorization: `Bearer ${token}`,
     },

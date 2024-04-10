@@ -51,6 +51,14 @@ class UserMeView(RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
 
 
+class UserGetMeView(ListAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [IsSelf]
+
+    def get_queryset(self):
+        return User.objects.filter(id=self.request.user.id)
+
+
 class CreateUser(CreateAPIView):
     serializer_class = UserRegistrationSerializer
     permission_classes = []

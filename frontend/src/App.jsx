@@ -14,6 +14,7 @@ const App = () => {
 
     const verify = async () => {
       setIsLoading(true);
+
       try {
         await useApiRequest.post("/auth/token/verify/", { token: token});
         dispatch(loginUser(token));
