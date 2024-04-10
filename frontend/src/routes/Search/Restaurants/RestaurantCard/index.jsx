@@ -11,7 +11,8 @@ import {
 function RestaurantCard({
   name,
   imageUrl,
-  address,
+  street,
+  city,
   averageRating,
   reviewsCount,
 }) {
@@ -20,7 +21,7 @@ function RestaurantCard({
       <BaseArticle>
         <RestInfo>
           <h3>{name}</h3>
-          <RestInfoAdress>{address}</RestInfoAdress>
+          <RestInfoAdress>{street}, {city}</RestInfoAdress>
           <RestRaitingContainer>
             <div>Rating: {averageRating}</div> 
             <div>({reviewsCount} reviews)</div>
