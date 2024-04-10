@@ -1,29 +1,35 @@
 import { useDispatch } from "react-redux";
 import Router from "./routes";
 import { GlobalStyle } from "./styles/index";
-import { useEffect } from "react";
-import { loginUser, logoutUser } from "./store/slices/loggedInUser";
-import useAutoFetch from "./axios/useAutoFetch";
-
+import { useEffect, useState } from "react";
+import { loginUser, logoutUser, userObject } from "./store/slices/loggedInUser";
+import useApiRequest, { getMyProfileData } from "./axios/useApiRequest";
 
 const App = () => {
   const dispatch = useDispatch()
-  const userData = JSON.parse(localStorage.getItem('user'))
-  const accessToken = localStorage.getItem('auth-token')
-
-  const {error, loading} = useAutoFetch('post', 'auth/token/verify', {token: accessToken})
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if(error === null){
-      dispatch(loginUser({user: userData, accessToken: accessToken}))
-    } else {
-      dispatch(logoutUser())
-      localStorage.clear()
-    }
-  }, [error, accessToken, dispatch, userData])
+    const token = window.localStorage.getItem("token");
 
-  if(loading) return <LoadingSpinner/>
+    const verify = async () => {
+      setIsLoading(true);
+      try {
+        await useApiRequest.post("/auth/token/verify/", { token: token});
+        dispatch(loginUser(token));
+        const user = await getMyProfileData(token);
+        dispatch(userObject(user.data))
+      } catch (error) {
+        window.localStorage.removeItem("token");
+        dispatch(logoutUser());
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    token ? verify() : dispatch(logoutUser());
+  }, []);
 
+  // if (!isLoading) {
   return (
     <>
     <GlobalStyle />

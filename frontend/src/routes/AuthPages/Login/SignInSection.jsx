@@ -15,12 +15,16 @@ import {
 } from '../Authentication/AuthenticationLayout.style'
 import useApiRequest, { getMyProfileData } from '../../../axios/useApiRequest'
 import CreateAccountProgress from '../AccountProgress/CreateAccountProgress'
-import { loginUser } from '../../../store/slices/loggedInUser'
+import { loginUser, userObject } from '../../../store/slices/loggedInUser'
 
 const Login = () => {
   const [user, setUser] = useState({ email: '', password: '' })
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInput = (e) => {
     setUser({ ...user, [e.target.id]: e.target.value })
@@ -28,10 +32,12 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault()
+    setError("")
+    setIsLoading(true);
     try {
-      const res = await useApiRequest('post', 'auth/token/', {
-        email: user.email,
-        password: user.password,
+      const res = await useApiRequest('post', '/auth/token/', {
+        email: email,
+        password: password,
       })
       const token = res.data.access
       navigate('/profile')
@@ -41,23 +47,10 @@ const Login = () => {
       dispatch(userObject(user.data))
     } catch (errors) {
       console.log(errors)
+    } finally {
+      setIsLoading(false);
     }
   }
-  //   sendRequest('post', 'auth/token/', user)
-  // }
-
-  // // useEffect(() => {
-  // //   isLoggedIn && navigate('/profile');
-  // // }, []);
-
-  // useEffect(() => {
-  //   if (data) {
-  //     dispatch(loginUser({ user: data.user, accessToken: data.access }))
-  //     window.localStorage.setItem('user', JSON.stringify(data.user))
-  //     localStorage.setItem('auth-token', data.access)
-  //     navigate('/')
-  //   }
-  // }, [data, dispatch, navigate])
 
   return (
     <>

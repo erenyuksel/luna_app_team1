@@ -22,7 +22,7 @@ const SignUp = () => {
   const handleSignUpClick = async (e) => {
     e.preventDefault()
     try {
-      const res = await useApiRequest.post('users/registration/', {
+      const res = await useApiRequest.post('/users/registration/', {
         email: userEmail,
       })
       navigate('/signup/congratulations')

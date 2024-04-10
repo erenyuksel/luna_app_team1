@@ -17,8 +17,11 @@ export const loggedInUser = createSlice({
             state.user = action.payload;
             console.log(state.user)
         },
+        setAvatar: (state, action) => {
+            state.friendList = action.payload;
+        }
     },
 })
 
-export const {loginUser, logoutUser} = loggedInUser.actions
+export const {loginUser, logoutUser, userObject, setAvatar} = loggedInUser.actions
 export default loggedInUser.reducer
