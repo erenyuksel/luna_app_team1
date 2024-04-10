@@ -5,7 +5,6 @@ import {
   SimpleButton,
 } from '../../../styles'
 import { Link, useNavigate } from 'react-router-dom'
-import useApiRequest from '../../../axios/useApiRequest'
 import {
   AuthForm,
   AuthFormContainer,
@@ -14,6 +13,7 @@ import {
   InputFieldContainer,
 } from '../Authentication/AuthenticationLayout.style'
 import CreateAccountProgress from '../AccountProgress/CreateAccountProgress'
+import AxiosUser from '../../../axios/useApiRequest'
 
 const SignUp = () => {
   const [userEmail, setEmail] = useState('')
@@ -22,13 +22,21 @@ const SignUp = () => {
 
   const handleSignUpClick = async (e) => {
     e.preventDefault()
-    sendRequest('post', 'users/registration/', { email: userEmail })
+    // const register = sendRequest('post', 'users/registration/', { email: userEmail })
+    try {
+      const res = await AxiosUser.post('/users/registration/', {
+        email: userEmail,
+      })
+      navigate('/signup/congratulations')
+    } catch (errors) {
+      console.log(error)
+    }
   }
 
-  if (data === 'success') {
-    localStorage.setItem('registered_email', userEmail)
-    navigate('/congratulation')
-  }
+  // if (data === 'success') {
+  //   localStorage.setItem('registered_email', userEmail)
+  //   navigate('/congratulations')
+  // }
 
   return (
     <>
