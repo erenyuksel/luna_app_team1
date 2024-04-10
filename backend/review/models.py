@@ -21,7 +21,7 @@ class Review(models.Model):
     text_content = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
-    likes = models.ManyToManyField(User, verbose_name='likes', related_name='liked_reviews', blank=True, null=True)
+    likes = models.ManyToManyField(User, verbose_name='likes', related_name='liked_reviews', blank=True)
 
     @property
     def count_likes(self):
