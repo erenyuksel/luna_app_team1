@@ -35,15 +35,9 @@ class User(AbstractUser):
     things_i_love = models.ManyToManyField(ThingsILove, related_name='user',
                                            verbose_name='Things User likes', blank=True, )
 
-    # @property
-    #
-    #
-    # def posts_count(self):
-    #     return self.review.count()
-    #
-    # @property
-    # def posts_count(self):
-    #     return self.comment.count()
+    @property
+    def total_review(self):
+        return self.reviews.count()
 
     def __str__(self):
         return self.username

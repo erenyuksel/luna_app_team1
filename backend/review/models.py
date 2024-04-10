@@ -16,7 +16,7 @@ RATING_CHOICES = {
 
 class Review(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name='reviews')
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='reviews')
     rating_stars = models.IntegerField(choices=RATING_CHOICES, blank=False)
     text_content = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
