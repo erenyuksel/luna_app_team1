@@ -10,6 +10,8 @@ import { DivWithBottomLine, SimpleButton } from '../../../styles'
 import useApiRequest from '../../../axios/useApiRequest'
 import InputField from '../Login/InputField'
 import CreateAccountProgress from '../AccountProgress/CreateAccountProgress'
+import { useDispatch } from 'react-redux'
+import { loggedInUser } from '../../../store/slices/loggedInUser'
 
 const Verification = () => {
   const registeredEmail = localStorage.getItem('registered_email')
@@ -24,30 +26,59 @@ const Verification = () => {
     location: '',
   })
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleInput = (e) => {
     setUserData({ ...userData, [e.target.id]: e.target.value })
   }
 
-  const { sendRequest, error, data } = useApiRequest({ auth: false })
-
-  const handleValidationSubmit = (e) => {
+  const handleValidationSubmit = async (e) => {
     e.preventDefault()
-    sendRequest('patch', 'users/validation/', userData)
-    .then((response) => {
-      console.log('Response:', response);
-    })
-    .catch((error) => {
-      console.error('Error during validation:', error);
-    });
-  };
+    setError('')
+    try {
+      setIsLoading(true)
+      await useApiRequest.patch('users/validation/', userData)
+
+      const res = await useApiRequest.post('/auth/token/', {
+        email: userData.email,
+        password: userData.password,
+      })
+
+      const token = res.data.access
+      navigate('/profile')
+      dispatch(loggedInUser(token))
+      window.localStorage.setItem('token', token)
+    } catch (errors) {
+      setError(errors.response.data.detail)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   useEffect(() => {
-    if (data === 'success') {
+    if (error === 'success') {
       navigate('/profile')
       localStorage.removeItem('registered_email')
     }
-  }, [data, navigate])
+  }, [error, navigate])
+
+  // sendRequest('patch', 'users/validation/', userData)
+  // .then((response) => {
+  //   console.log('Response:', response);
+  // })
+  // .catch((error) => {
+  // console.error('Error during validation:', error);
+  // });
+  // };
+
+  // useEffect(() => {
+  //   if (data === 'success') {
+  //     navigate('/profile')
+  //     localStorage.removeItem('registered_email')
+  //   }
+  // }, [data, navigate])
 
   return (
     <>
@@ -59,7 +90,7 @@ const Verification = () => {
           <div className="input-container">
             <InputField
               placeholder="E-mail address"
-              error={error}
+              // error={error}
               type="email"
               userData={userData}
               id={'email'}
@@ -68,21 +99,21 @@ const Verification = () => {
             <InputField
               placeholder={'Username'}
               id={'username'}
-              error={error}
+              // error={error}
               userData={userData}
               handleInput={handleInput}
             />
             <InputField
               placeholder={'First Name'}
               id={'first_name'}
-              error={error}
+              // error={error}
               userData={userData}
               handleInput={handleInput}
             />
             <InputField
               placeholder={'Last Name'}
               id={'last_name'}
-              error={error}
+              // error={error}
               userData={userData}
               handleInput={handleInput}
             />
@@ -91,7 +122,7 @@ const Verification = () => {
               placeholder={'Password'}
               type={'password'}
               id={'password'}
-              error={error}
+              // error={error}
               userData={userData}
               handleInput={handleInput}
             />
@@ -99,7 +130,7 @@ const Verification = () => {
               placeholder={'Validation code'}
               type="text"
               id={'code'}
-              error={error}
+              // error={error}
               userData={userData}
               handleInput={handleInput}
             />
@@ -107,7 +138,7 @@ const Verification = () => {
               placeholder={'Location'}
               type="text"
               id={'location'}
-              error={error}
+              // error={error}
               userData={userData}
               handleInput={handleInput}
             />
@@ -115,14 +146,14 @@ const Verification = () => {
               placeholder={'Repeat Password'}
               type="password"
               id={'password_repeat'}
-              error={error}
+              // error={error}
               userData={userData}
               handleInput={handleInput}
             />
-            {error?.non_field_errors && (
-              <ErrorMessage>{error.non_field_errors}</ErrorMessage>
-            )}
-            {error?.detail && <ErrorMessage>{error.detail}</ErrorMessage>}
+            {/* {error?.non_field_errors && (
+              // <ErrorMessage>{error.non_field_errors}</ErrorMessage>
+            )} */}
+            {/* {error?.detail && <ErrorMessage>{error.detail}</ErrorMessage>} */}
           </div>
           <div>
             <CenterIt>
