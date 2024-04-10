@@ -6,6 +6,10 @@ def user_directory_path(instance, filename):
     return f'{instance.id}/user/{filename}'
 
 
+def user_banner_directory_path(instance, filename):
+    return f'{instance.id}/user/banner/{filename}'
+
+
 class ThingsILove(models.Model):
     thing = models.CharField(max_length=200)
 
@@ -26,16 +30,14 @@ class User(AbstractUser):
     description = models.TextField(verbose_name='description', max_length=400, blank=True)
     joined_date = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     profile_picture = models.ImageField(verbose_name='picture', upload_to=user_directory_path, blank=True, null=True)
+    banner_picture = models.ImageField(verbose_name='banner_picture', upload_to=user_banner_directory_path, blank=True,
+                                       null=True)
     things_i_love = models.ManyToManyField(ThingsILove, related_name='user',
                                            verbose_name='Things User likes', blank=True, )
 
-    # @property
-    # def posts_count(self):
-    #     return self.review.count()
-    #
-    # @property
-    # def posts_count(self):
-    #     return self.comment.count()
+    @property
+    def total_review(self):
+        return self.reviews.count()
 
     def __str__(self):
         return self.username

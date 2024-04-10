@@ -7,10 +7,10 @@ User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = User
-        fields = ['id', 'email', 'first_name', 'last_name', 'username', 'location', 'things_i_love']
+        fields = ['id', 'email', 'phone', 'first_name', 'last_name', 'username', 'location', 'things_i_love',
+                  'profile_picture', 'banner_picture', 'joined_date', 'description', 'total_review']
         read_only_fields = ['email']
 
 
