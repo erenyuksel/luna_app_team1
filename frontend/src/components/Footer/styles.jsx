@@ -13,6 +13,7 @@ export const FooterContainer = styled.footer`
 `
 
 export const FooterMainContainer = styled.div`
+  max-width: 1240px;
   width: 100%;
   padding: 1rem 3rem;
   display: flex;
@@ -20,8 +21,13 @@ export const FooterMainContainer = styled.div`
   gap: 1rem;
 
   @media (max-width: 788px) {
+    padding: 1rem 2rem;
     flex-direction: column;
     gap: 1.5rem;
+  }
+
+  @media (max-width: 500px) {
+    padding: 1rem 1rem;
   }
 `
 
@@ -40,8 +46,8 @@ export const FooterSocial = styled.div`
 
   @media (max-width: 788px) {
     margin: 0 auto;
+    flex-wrap: wrap;
   }
-
 `
 
 export const FooterSocialButton = styled.div`
@@ -63,11 +69,22 @@ export const FooterSocialButton = styled.div`
 `
 
 export const FooterCopyright = styled.div`
+  max-width: 1240px;
+
   width: 100%;
   padding: 0.5rem 3rem 1rem 3rem;
   border-top: 1px solid var(--gray);
   display: flex;
   justify-content: flex-start;
+
+  @media (max-width: 788px) {
+    padding: 1rem 2rem;
+    justify-content: space-around;
+  }
+
+  @media (max-width: 500px) {
+    padding: 1rem 1rem;
+  }
 `
 
 export const Copyright = styled.p`
