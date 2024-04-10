@@ -35,6 +35,10 @@ export const FooterLinks = styled.div`
   display: flex;
   justify-content: space-around;
   gap: 2rem;
+  @media (max-width: 788px) {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
 `
 
 export const FooterSocial = styled.div`

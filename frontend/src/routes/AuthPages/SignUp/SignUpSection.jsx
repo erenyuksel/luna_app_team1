@@ -13,23 +13,21 @@ import {
   InputFieldContainer,
 } from '../Authentication/AuthenticationLayout.style'
 import CreateAccountProgress from '../AccountProgress/CreateAccountProgress'
-import AxiosUser from '../../../axios/useApiRequest'
+import useApiRequest from '../../../axios/useApiRequest'
 
 const SignUp = () => {
   const [userEmail, setEmail] = useState('')
   const navigate = useNavigate()
-  const { sendRequest, error, data } = useApiRequest()
 
   const handleSignUpClick = async (e) => {
     e.preventDefault()
-    // const register = sendRequest('post', 'users/registration/', { email: userEmail })
     try {
-      const res = await AxiosUser.post('/users/registration/', {
+      const res = await useApiRequest.post('/users/registration/', {
         email: userEmail,
       })
       navigate('/signup/congratulations')
     } catch (errors) {
-      console.log(error)
+      console.log(errors)
     }
   }
 
@@ -56,9 +54,9 @@ const SignUp = () => {
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
-                {error?.email && <ErrorMessage>{error.email}</ErrorMessage>}
+                {/* {error?.email && <ErrorMessage>{error.email}</ErrorMessage>} */}
               </InputFieldContainer>
-              {error?.detail && <ErrorMessage>{error.detail}</ErrorMessage>}
+              {/* {error?.detail && <ErrorMessage>{error.detail}</ErrorMessage>} */}
             </div>
             <div>
               <SimpleButton onClick={handleSignUpClick}>Register</SimpleButton>

@@ -1,4 +1,4 @@
-import { GridContainer, SectionContainer } from '../../../styles'
+import { GridContainer } from '../../../styles'
 import UserCard from './UserCard'
 
 function UsersList() {

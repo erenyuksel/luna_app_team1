@@ -1,18 +1,22 @@
-import axios from "axios"
-import { useState } from "react"
+import axios from 'axios'
+import { useState } from 'react'
 
-console.log(window.location.hostname)
-const BASE_URL = 
+const BASE_URL =
   window.location.hostname === 'localhost'
     ? 'http://localhost:8000/backend/api'
     : 'https://luna1.propulsion-learn.ch/backend/api'
 
-const AxiosUser = axios.create({
+const useApiRequest = axios.create({
   baseURL: BASE_URL,
 })
 
-
-
+export const getMyProfileData = async (token) => {
+  return await useApiRequest.get('/users/me/', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+}
 
 // const useApiRequest = (options = { auth: true }) => {
 //   const [data, setData] = useState(null)
@@ -66,4 +70,4 @@ const AxiosUser = axios.create({
 //   return { sendRequest, data, error, loading }
 // }
 
-export default AxiosUser
+export default useApiRequest

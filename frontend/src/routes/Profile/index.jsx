@@ -23,7 +23,6 @@ function Profile() {
         </UserPhotoNav>
 
         <UserInfoStatistics />
-        {/* <UserReviews /> */}
         <Outlet />
 
         <ProfileData />

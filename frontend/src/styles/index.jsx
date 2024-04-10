@@ -44,6 +44,15 @@ export const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
   }
+
+  textarea {
+    font-family: 'Roboto', 'Open Sans', sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    &::placeholder {
+      color: #ccc;
+    }
+  }
 `
 
 export const Cover = styled.div`
@@ -73,6 +82,15 @@ export const SectionContainer = styled.section`
   @media (max-width: 500px) {
     padding: 1rem 1rem;
   }
+`
+
+export const CenteredSectionContainer = styled(SectionContainer)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 100%;
+
+  /* position: relative; */
 `
 
 export const GridContainer = styled.div`
