@@ -36,6 +36,8 @@ class User(AbstractUser):
                                            verbose_name='Things User likes', blank=True, )
 
     # @property
+    #
+    #
     # def posts_count(self):
     #     return self.review.count()
     #
