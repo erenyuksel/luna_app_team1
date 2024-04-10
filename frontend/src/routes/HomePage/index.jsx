@@ -1,15 +1,10 @@
 import {
-  BaseArticle,
-  DivWithLine,
-  GridContainer,
   InputBase,
   MainContainer,
   SectionContainer,
   SimpleButton,
 } from '../../styles'
 import RestaurantsList from '../Search/Restaurants'
-import RestaurantCard from '../Search/Restaurants/RestaurantCard'
-import RestauranCard from '../Search/Restaurants/RestaurantCard'
 import { HomePageCover, HomePageCoverSearch } from './styles'
 
 const HomePage = () => {
