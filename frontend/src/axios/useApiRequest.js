@@ -3,15 +3,15 @@ import { useState } from 'react'
 
 const BASE_URL =
   window.location.hostname === 'localhost'
-    ? 'http://localhost:8000/backend/api/'
-    : 'https://luna1.propulsion-learn.ch/backend/api/'
+    ? 'http://localhost:8000/backend/api'
+    : 'https://luna1.propulsion-learn.ch/backend/api'
 
 const useApiRequest = axios.create({
   baseURL: BASE_URL,
 })
 
 export const getMyProfileData = async (token) => {
-  return await useApiRequest.get('/', {
+  return await useApiRequest.get('/users/me/', {
     headers: {
       Authorization: `Bearer ${token}`,
     },

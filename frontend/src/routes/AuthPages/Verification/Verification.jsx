@@ -39,7 +39,7 @@ const Verification = () => {
     setError('')
     try {
       setIsLoading(true)
-      await useApiRequest.patch('users/validation/', userData)
+      await useApiRequest.patch('/users/validation/', userData)
 
       const res = await useApiRequest.post('/auth/token/', {
         email: userData.email,
