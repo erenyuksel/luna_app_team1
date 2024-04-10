@@ -182,7 +182,7 @@ export const SimpleButton = styled(ButtonBase)`
 export const InputBase = styled.input`
   padding: 0.6rem;
   border: 1px solid var(--dark-gray);
-  background-color: var(--gray);
+  background-color: var(--white);
   border-radius: 3px;
 
   font-size: 1rem;
@@ -191,6 +191,10 @@ export const InputBase = styled.input`
   &:focus-visible {
     border: 1px solid var(--orange);
     outline: 2px solid salmon;
-    color: var(--orange);
+    color: #333;
+  }
+
+  &::placeholder {
+    color: #aaa;
   }
 `
