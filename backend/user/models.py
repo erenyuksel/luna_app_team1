@@ -37,6 +37,7 @@ class User(AbstractUser):
 
     # @property
     #
+    #
     # def posts_count(self):
     #     return self.review.count()
     #
