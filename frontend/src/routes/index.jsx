@@ -14,6 +14,9 @@ import UserReviews from './Profile/Elements/UserReviews'
 import UserComments from './Profile/Elements/UserComments'
 import UserRestaurants from './Profile/Elements/UserRestaurants'
 import EditProfile from './Profile/Elements/Edit'
+import RestaurantsList from './Search/Restaurants'
+import ReviewsList from './Search/Reviews'
+import UsersList from './Search/Users'
 
 const Router = () => {
   return (
@@ -24,8 +27,11 @@ const Router = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signup/congratulations" element={<Congratulations />} />
           <Route path="/signup/verification" element={<Verification />} />
-          <Route path="*" element={<NotFound />} />
-          <Route path="/search" element={<Search />} />
+          <Route path="/search" element={<Search />}>
+            <Route index element={<RestaurantsList />} />
+            <Route path="/search/reviews" element={<ReviewsList />} />
+            <Route path="/search/users" element={<UsersList />} />
+          </Route>
           <Route path="/profile" element={<Profile />}>
             <Route index element={<UserReviews />} />
             <Route path="/profile/comments" element={<UserComments />} />
@@ -35,6 +41,7 @@ const Router = () => {
           <Route path="/add/review" element={<NewReview />} />
           <Route path="/add/restaurant" element={<NewRestaurant />} />
           <Route path="/login" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
