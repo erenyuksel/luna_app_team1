@@ -12,32 +12,28 @@ import {
   AuthFormContainer,
   CenterIt,
   InputFieldContainer,
+  ErrorMessage,
 } from '../Authentication/AuthenticationLayout.style'
 import useApiRequest, { getMyProfileData } from '../../../axios/useApiRequest'
 import CreateAccountProgress from '../AccountProgress/CreateAccountProgress'
 import { loginUser, userObject } from '../../../store/slices/loggedInUser'
 
 const Login = () => {
-  const [user, setUser] = useState({ email: '', password: '' })
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleInput = (e) => {
-    setUser({ ...user, [e.target.id]: e.target.value })
-  }
 
   const handleLogin = async (e) => {
     e.preventDefault()
-    setError("")
-    setIsLoading(true);
+    setError('')
+    setIsLoading(true)
     try {
-      const res = await useApiRequest('post', '/auth/token/', {
-        email: email,
-        password: password,
+      const res = await useApiRequest.post('/auth/token/', {
+        email,
+        password,
       })
       const token = res.data.access
       navigate('/profile')
@@ -46,9 +42,9 @@ const Login = () => {
       const user = await getMyProfileData(token)
       dispatch(userObject(user.data))
     } catch (errors) {
-      console.log(errors)
+      setError(errors.response.data.detail)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
   }
 
@@ -67,11 +63,11 @@ const Login = () => {
                     placeholder="Email"
                     type="email"
                     required
-                    onChange={handleInput}
-                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
-                {/* {error?.email && <ErrorMessage>{error.email}</ErrorMessage>} */}
+                {error && <ErrorMessage>{error}</ErrorMessage>}
               </InputFieldContainer>
               <InputFieldContainer>
                 <div className={'input-wrapper'}>
@@ -79,20 +75,16 @@ const Login = () => {
                     placeholder="Password"
                     type="password"
                     required
-                    onChange={handleInput}
-                    id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
-                {/* {error?.password && ( */}
-                {/* <ErrorMessage>{error.password}</ErrorMessage> */}
-                {/* )} */}
               </InputFieldContainer>
-              {/* {error?.detail && (
-                <p className={'error-message'}>{error.detail}</p> */}
-              {/* )} */}
             </div>
             <div className={'form-footer'}>
-              <SimpleButton onClick={handleLogin}>sign in</SimpleButton>
+              <SimpleButton type="submit" disabled={isLoading}>
+                {isLoading ? 'Loading...' : 'Sign In'}
+              </SimpleButton>
               <CreateAccountProgress />
             </div>
           </AuthForm>
