@@ -6,6 +6,18 @@ export const ProgressCirclesContainer = styled.div`
     gap: 1rem;
     margin-top: 2rem;
     height: 3rem;
+
+    > div {
+      width: 0.6rem;
+      height: 0.6rem;
+      border-radius: 50%;
+      border: 2px solid lightgray;
+    }
+
+    div:nth-of-type(${props => props.step}) {
+      background-color: black;
+      border-color: lightgray;
+    }
 `
 const CreateAccountProgress = ({step}) => {
     return (

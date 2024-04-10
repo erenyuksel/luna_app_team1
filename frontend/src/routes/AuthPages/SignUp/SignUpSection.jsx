@@ -1,18 +1,28 @@
 import React, { useState } from 'react'
-import { DivWithBottomLine, SectionContainer, SimpleButton } from '../../../styles'
-import { useNavigate } from 'react-router-dom'
+import {
+  DivWithBottomLine,
+  SectionContainer,
+  SimpleButton,
+} from '../../../styles'
+import { Link, useNavigate } from 'react-router-dom'
 import useApiRequest from '../../../axios/useApiRequest'
-import { AuthForm, AuthFormContainer, ErrorMessage, InputFieldContainer } from '../Login/AuthenticationLayout.style'
+import {
+  AuthForm,
+  AuthFormContainer,
+  CenterIt,
+  ErrorMessage,
+  InputFieldContainer,
+} from '../Authentication/AuthenticationLayout.style'
+import CreateAccountProgress from '../AccountProgress/CreateAccountProgress'
 
 const SignUp = () => {
-
   const [userEmail, setEmail] = useState('')
   const navigate = useNavigate()
   const { sendRequest, error, data } = useApiRequest()
 
-  const handleSignUpClick = async(e) => {
+  const handleSignUpClick = async (e) => {
     e.preventDefault()
-    sendRequest('post', 'auth/registration/', {email: userEmail})
+    sendRequest('post', 'users/registration/', { email: userEmail })
   }
 
   if (data === 'success') {
@@ -26,10 +36,11 @@ const SignUp = () => {
         <AuthFormContainer>
           <AuthForm>
             <div className={'input-container'}>
-              <DivWithBottomLine>REGISTRATION</DivWithBottomLine>
+              <CenterIt>
+                <DivWithBottomLine>REGISTRATION</DivWithBottomLine>
+              </CenterIt>
               <InputFieldContainer>
                 <div className={'input-wrapper'}>
-                  {/* <img src={LetterIcon}></img> */}
                   <input
                     placeholder="Email"
                     type="email"
@@ -43,7 +54,7 @@ const SignUp = () => {
             </div>
             <div>
               <SimpleButton onClick={handleSignUpClick}>Register</SimpleButton>
-              {/* <CreateAccountProgress step={1}/> */}
+              <CreateAccountProgress step={1} />
             </div>
           </AuthForm>
         </AuthFormContainer>
