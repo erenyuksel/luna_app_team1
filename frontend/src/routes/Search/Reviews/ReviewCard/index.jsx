@@ -1,11 +1,8 @@
 import { BaseArticle, DivWithLine } from '../../../../styles'
+import { ReviewCardInfo } from './styles'
+
+import ReviewReactionsComponent from '../ReviewReactions'
 import UserCardHeader from '../../Users/UserCard/UserCardHeader'
-import {
-  ReviewCardInfo,
-  ReviewComment,
-  ReviewLike,
-  ReviewReactions,
-} from './styles'
 import ReviewComments from '../ReviewComments'
 
 function ReviewCard({ review, user }) {
@@ -20,13 +17,7 @@ function ReviewCard({ review, user }) {
         />
         <ReviewCardInfo>
           <h3>{review.restaurant.name}</h3>
-          <ReviewReactions>
-            <ReviewLike>
-              <i className="lar la-heart"></i> Like{' '}
-              {review.count_likes > 0 ? review.count_likes : null}
-            </ReviewLike>
-            <ReviewComment>Comments</ReviewComment>
-          </ReviewReactions>
+          <ReviewReactionsComponent countLikes={review.count_likes} />
 
           <h4>Last comments</h4>
           <ReviewComments reviewId={review.id} />
