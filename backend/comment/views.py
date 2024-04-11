@@ -30,7 +30,7 @@ class CommentCreateView(CreateAPIView):
 
 class UserCommentListView(ListAPIView):
     serializer_class = CommentSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = []
 
     def get_queryset(self):
         user = User.objects.get(id=self.kwargs['user_id'])
