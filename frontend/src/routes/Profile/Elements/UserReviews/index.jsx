@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { SectionTitle, UserSection } from '../../styles'
 import {
   ReviewCard,
@@ -6,6 +7,7 @@ import {
   ReviewHeader,
   ReviewTitle,
 } from './styles'
+import { useSelector } from 'react-redux'
 
 const reviews = [
   {
@@ -23,9 +25,17 @@ const reviews = [
   },
 ]
 
-function UserReviews() {
+function UserReviews(userData) {
+
+  useEffect(() => {
+
+  }, []);
+
+  // const userid = useSelector((state) => {})
+
   return (
     <UserSection>
+      {console.log('reviews', userData.user)}
       <SectionTitle>Reviews</SectionTitle>
 
       {reviews.map((review, index) => (
