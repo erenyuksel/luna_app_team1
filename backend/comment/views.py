@@ -48,4 +48,11 @@ class SpecificReviewCommentView(ListAPIView):
     permission_classes = []
 
     def get_queryset(self):
-        return Comment.objects.filter(review_id=self.kwargs['pk'])
+        review = None
+        try:
+            review = Review.objects.get(id=self.kwargs['pk'])
+        except:
+            print("No review found")
+        if review:
+            return Comment.objects.filter(review=review)
+        return []
