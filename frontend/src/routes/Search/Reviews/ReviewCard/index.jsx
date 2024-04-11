@@ -16,7 +16,7 @@ function ReviewCard({ review, user }) {
           url={user.profile_picture}
           firstname={user.first_name}
           lastname={user.last_name}
-          reviews={user.total_reviews}
+          reviews={user.total_review}
         />
         <ReviewCardInfo>
           <h3>{review.restaurant.name}</h3>
