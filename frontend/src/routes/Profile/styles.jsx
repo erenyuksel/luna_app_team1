@@ -49,6 +49,7 @@ export const UserSection = styled.section`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  border: 1px red solid;
 
   padding: 1rem;
 
