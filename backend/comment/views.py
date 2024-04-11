@@ -51,8 +51,8 @@ class SpecificReviewCommentView(ListAPIView):
         review = None
         try:
             review = Review.objects.get(id=self.kwargs['pk'])
-        except:
-            print("No review found")
+        except Exception as e:
+            print(e, "No review found")
         if review:
             return Comment.objects.filter(review=review)
         return []
