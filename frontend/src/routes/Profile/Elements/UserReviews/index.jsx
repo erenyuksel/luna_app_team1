@@ -11,22 +11,6 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import  useApiRequest  from '../../../../axios/useApiRequest'
 
-// const reviews = [
-//   {
-//     title: 'Läderach Chocolatier Suisse',
-//     date: '01.01.2018 15:22',
-//     image1: 'stars',
-//     description:
-//       'This location at the Bahnhofstrasse is quite friendly and easily located across the street from the train station. The people there seem to be quite good and helpful in their service.',
-//   },
-//   {
-//     title: 'Kaufläuten',
-//     date: '01.01.2018 16:22',
-//     image1: 'stars',
-//     description: 'Nice place.',
-//   },
-// ]
-
 function UserReviews() {
   let {user_id} = useParams()
   const [reviews, setReviews] =useState([])
