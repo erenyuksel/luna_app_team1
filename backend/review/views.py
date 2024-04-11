@@ -53,6 +53,7 @@ class RestaurantReviewsListView(ListAPIView):
 
 class ListReviewsUserView(ListAPIView):
     serializer_class = ReviewSerializer
+    permission_classes = []
 
     # lookup_url_kwarg = "user_id"
 

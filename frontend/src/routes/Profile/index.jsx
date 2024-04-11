@@ -11,24 +11,44 @@ import ProfileData from './Elements/ProfileData'
 import UserInfoStatistics from './Elements/ProfileData/UserStatistics'
 import { Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import  useApiRequest  from '../../axios/useApiRequest'
+import { useParams } from 'react-router'
+
+
 
 function Profile() {
-  const userData = useSelector((state) => state.loggedInUser.user)[0]
-  console.log('sssss', userData)
+  let {user_id} = useParams()
+  const [user, setUser] = useState('')
+
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const get_user = await useApiRequest.get(`/users/${user_id}`);
+        setUser(get_user.data[0])
+      } catch (error) {
+        console.log(error)
+      } 
+    };
+    getUser()
+  }, []);
+
+
   return (
     <MainContainer>
       <UserCover />
 
       <UserGridContainer>
         <UserPhotoNav>
-          <ProfilePicture alt="profilepic" src={userData.profile_picture} />
-          <ProfileNav />
+          <ProfilePicture alt="profilepic" src={user.profile_picture} />
+          <ProfileNav user={user} />
         </UserPhotoNav>
 
-        <UserInfoStatistics user={userData}  />
-        <Outlet user={userData} />
+        <UserInfoStatistics user={user}  />
+        <Outlet />
 
-        <ProfileData user={userData} />
+        <ProfileData user={user} />
       </UserGridContainer>
     </MainContainer>
   )
