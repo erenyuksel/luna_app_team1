@@ -1,8 +1,9 @@
 import useApiRequest from "./useApiRequest";
 
-export const fetchRestaurantsApi = async () => {
+export const fetchRestaurantsApi = async (restId) => {
   try {
-    const response = await useApiRequest.get('/search/restaurants/');
+    const endpoint = restId ? `/restaurants/${restId}` : '/search/restaurants/';
+    const response = await useApiRequest.get(endpoint);
     return response.data;
   } catch (error) {
     console.error("Error:", error);
