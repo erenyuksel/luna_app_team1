@@ -53,8 +53,7 @@ class RestaurantReviewsListView(ListAPIView):
 
 class ListReviewsUserView(ListAPIView):
     serializer_class = ReviewSerializer
-
-    # lookup_url_kwarg = "user_id"
+    permission_classes = []
 
     def get_queryset(self):
         user_id = self.kwargs.get("user_id")
