@@ -18,6 +18,7 @@ import RestaurantsList from './Search/Restaurants'
 import ReviewsList from './Search/Reviews'
 import UsersList from './Search/Users'
 import ProtectedRoutes from './ProtectedRoutes'
+import RestauranPage from './Search/Restaurants/RestaurantPage'
 
 const Router = () => {
   return (
@@ -33,17 +34,23 @@ const Router = () => {
             <Route path="/search/reviews" element={<ReviewsList />} />
             <Route path="/search/users" element={<UsersList />} />
           </Route>
-          <Route element={<ProtectedRoutes />}>
-          <Route path="/profile" element={<Profile />}>
+          <Route path="/restaurants/:restId" element={<RestauranPage />} />
+          {/* <Route element={<ProtectedRoutes />}> */}
+          <Route path="/profile/:user_id" element={<Profile />}>
             <Route index element={<UserReviews />} />
-            <Route path="/profile/comments" element={<UserComments />} />
-            <Route path="/profile/restaurants" element={<UserRestaurants />} />
-            <Route path="/profile/edit" element={<EditProfile />} />
-            
+            <Route
+              path="/profile/:user_id/comments"
+              element={<UserComments />}
+            />
+            <Route
+              path="/profile/:user_id/restaurants"
+              element={<UserRestaurants />}
+            />
+            <Route path="/profile/:user_id/edit" element={<EditProfile />} />
           </Route>
           <Route path="/add/review" element={<NewReview />} />
           <Route path="/add/restaurant" element={<NewRestaurant />} />
-          </Route>
+          {/* </Route> */}
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Route>
