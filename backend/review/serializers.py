@@ -8,7 +8,8 @@ from user.serializers import UserSerializer
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ['id', 'rating_stars', 'count_likes', 'date_created', 'date_modified', 'restaurant', 'user', 'likes']
+        fields = ['id', 'rating_stars', 'text_content', 'count_likes', 'date_created', 'date_modified', 'restaurant',
+                  'user', 'likes']
         read_only_fields = ['restaurant', 'user', 'likes']
 
     def to_representation(self, instance):

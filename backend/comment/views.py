@@ -41,3 +41,18 @@ class DeleteCommentView(DestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = [IsAuthor]
+
+
+class SpecificReviewCommentView(ListAPIView):
+    serializer_class = CommentSerializer
+    permission_classes = []
+
+    def get_queryset(self):
+        review = None
+        try:
+            review = Review.objects.get(id=self.kwargs['pk'])
+        except Exception as e:
+            print(e, "No review found")
+        if review:
+            return Comment.objects.filter(review=review)
+        return []
