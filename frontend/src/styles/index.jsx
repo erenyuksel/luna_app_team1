@@ -125,6 +125,8 @@ export const DivWithLine = styled(BaseDiv)`
   border-top: 5px solid var(--orange);
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
+
+  cursor: ${(props) => (props.clickable ? 'pointer' : 'default')};
 `
 
 export const DivWithBottomLine = styled(BaseDiv)`

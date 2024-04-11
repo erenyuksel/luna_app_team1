@@ -7,19 +7,40 @@ import {
   RestRaitingContainer,
 } from './styles'
 import placeholderImage from '../../../../assets/photos/rest.png'
-
 import RatingStars from '../../../../components/SmallElements/RatingStars'
+import { useNavigate } from 'react-router-dom'
 
 function RestaurantCard({
   name,
+  id,
   imageUrl,
   street,
   city,
   averageRating,
   reviewsCount,
 }) {
+  const navigate = useNavigate()
+
+  const handleCardClick = () => {
+    navigate(`/restaurants/${id}`)
+  }
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      navigate(`/restaurants/${id}`)
+    }
+  }
+
   return (
-    <DivWithLine>
+    <DivWithLine
+      onClick={handleCardClick}
+      onKeyPress={handleKeyPress}
+      tabIndex="0"
+      role="button"
+      aria-label={`View details about ${name}`}
+      clickable
+    >
       <BaseArticle>
         <RestInfo>
           <h3>{name}</h3>
@@ -28,7 +49,7 @@ function RestaurantCard({
           </RestInfoAdress>
           <RestRaitingContainer>
             <RatingStars rating={averageRating} />
-            {reviewsCount}
+            {reviewsCount} Reviews
           </RestRaitingContainer>
         </RestInfo>
         <ImageWrapper>
