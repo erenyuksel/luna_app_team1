@@ -1,4 +1,3 @@
-import React from 'react'
 import { BaseArticle, DivWithLine } from '../../../../styles'
 import {
   ImageWrapper,
@@ -7,6 +6,7 @@ import {
   RestPhoto,
   RestRaitingContainer,
 } from './styles'
+import placeholderImage from '../../../../assets/photos/rest.png'
 
 function RestaurantCard({
   name,
@@ -21,14 +21,16 @@ function RestaurantCard({
       <BaseArticle>
         <RestInfo>
           <h3>{name}</h3>
-          <RestInfoAdress>{street}, {city}</RestInfoAdress>
+          <RestInfoAdress>
+            {street}, {city}
+          </RestInfoAdress>
           <RestRaitingContainer>
-            <div>Rating: {averageRating}</div> 
+            <div>Rating: {averageRating}</div>
             <div>({reviewsCount} reviews)</div>
           </RestRaitingContainer>
         </RestInfo>
         <ImageWrapper>
-          <RestPhoto src={imageUrl} alt={name}></RestPhoto>
+          <RestPhoto src={imageUrl || placeholderImage} alt={name} />
         </ImageWrapper>
       </BaseArticle>
     </DivWithLine>

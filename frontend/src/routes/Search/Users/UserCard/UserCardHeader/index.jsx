@@ -7,14 +7,14 @@ import {
   UserCardReviews,
 } from '../styles'
 
-function UserCardHeader({ url, userName, reviews }) {
+function UserCardHeader({ url, firstname, lastname, reviews }) {
   return (
     <UserCardHeaderContainer>
       <UserCardAvatarWrapper>
-        <UserAvatar src={url} alt={userName} />
+        <UserAvatar src={url} alt={lastname} />
       </UserCardAvatarWrapper>
       <UserCardHeaderInfo>
-        <h4>{userName}</h4>
+        <h4>{firstname} {lastname}</h4>
         <UserCardReviews>{reviews} reviews in total</UserCardReviews>
       </UserCardHeaderInfo>
     </UserCardHeaderContainer>

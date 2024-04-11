@@ -1,5 +1,5 @@
 import logoImage from '../../../public/rocket.png'
-import { SectionContainer } from '../../styles'
+import useLogout from '../../utils/useLogout'
 
 import {
   HeaderContainer,
@@ -11,37 +11,57 @@ import {
   NavLeftButton,
   NavRightButton,
   NavLinks,
+  LogoutButton,
 } from './styles'
 
-// import DropDownMenu from './DropDownMenu'
-// import { BaseDiv, ButtonBase } from '../../styles'
-
 const Header = () => {
+  const isLoggedIn = localStorage.getItem('token')
+  const logout = useLogout()
+
+  const handleLogout = () => {
+    logout()
+  }
+
   return (
     <HeaderContainer>
-        <NavGroupLogo to="/">
-          <NavLogoIcon src={logoImage} alt="Luna logo" />
-          <NavLogoText>LUNA</NavLogoText>
-        </NavGroupLogo>
+      <NavGroupLogo to="/">
+        <NavLogoIcon src={logoImage} alt="Luna logo" />
+        <NavLogoText>LUNA</NavLogoText>
+      </NavGroupLogo>
 
-        <NavLinks>
-          <NavGroupLink to="/">
-            <NavItemText>Home</NavItemText>
-          </NavGroupLink>
+      <NavLinks>
+        <NavGroupLink to="/">
+          <NavItemText>Home</NavItemText>
+        </NavGroupLink>
 
-          <NavGroupLink to="/search">
-            <NavItemText>Search</NavItemText>
-          </NavGroupLink>
+        <NavGroupLink to="/search">
+          <NavItemText>Search</NavItemText>
+        </NavGroupLink>
 
+        {isLoggedIn ? (
           <NavGroupLink to="/profile">
             <NavItemText>Profile</NavItemText>
           </NavGroupLink>
-        </NavLinks>
+        ) : (
+          <></>
+        )}
+      </NavLinks>
 
+      {isLoggedIn ? (
+        <LogoutButton
+          role="button"
+          tabIndex="0"
+          onClick={handleLogout}
+          onKeyPress={(e) => e.key === 'Enter' && handleLogout()}
+        >
+          Logout
+        </LogoutButton>
+      ) : (
         <div>
           <NavLeftButton to="/signup">SignUp</NavLeftButton>
           <NavRightButton to="/login">Login</NavRightButton>
         </div>
+      )}
     </HeaderContainer>
   )
 }
