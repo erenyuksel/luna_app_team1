@@ -10,9 +10,8 @@ import Login from './AuthPages/Login/SignInSection'
 import SignUp from './AuthPages/SignUp/SignUpSection'
 import NewRestaurant from './ContributionPages/NewRestaurant'
 import NewReview from './ContributionPages/NewReview'
-<<<<<<< HEAD
 import AboutUsPage from './AboutUs'
-=======
+
 import UserReviews from './Profile/Elements/UserReviews'
 import UserComments from './Profile/Elements/UserComments'
 import UserRestaurants from './Profile/Elements/UserRestaurants'
@@ -23,7 +22,6 @@ import UsersList from './Search/Users'
 import ProtectedRoutes from './ProtectedRoutes'
 import RestauranPage from './Search/Restaurants/RestaurantPage'
 
->>>>>>> master
 const Router = () => {
   return (
     <BrowserRouter>
@@ -56,11 +54,8 @@ const Router = () => {
           <Route path="/add/restaurant" element={<NewRestaurant />} />
           {/* </Route> */}
           <Route path="/login" element={<Login />} />
-<<<<<<< HEAD
           <Route path="/signup" element={<SignUp />} />
           <Route path="/aboutus" element={<AboutUsPage />} />
-=======
->>>>>>> master
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
