@@ -12,10 +12,10 @@ export const fetchEditProfile = async (formData) => {
   }
 }
 
-export const fetchDeleteProfile = async () => {
+export const fetchDeleteProfile = async (user_id) => {
   let {user_id} = useParams();
   try {
-    const response = await useApiRequest.delete(`/users/me/`)
+    const response = await useApiRequest.delete(`/users/me/${user_id}`)
     return response.data
   } catch (error) {
     console.error('Error deleting profile:', error)

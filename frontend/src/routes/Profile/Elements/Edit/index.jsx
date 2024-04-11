@@ -41,7 +41,7 @@ function EditProfile() {
   const handleDeleteAccount = async () => {
     try {
       setIsLoading(true)
-      await fetchDeleteProfile()
+      await fetchDeleteProfile(user_id)
     } catch (err) {
       setError(err.message)
     } finally {
