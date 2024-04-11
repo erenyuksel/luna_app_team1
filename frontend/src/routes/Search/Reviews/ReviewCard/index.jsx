@@ -1,14 +1,18 @@
 import { BaseArticle, DivWithLine } from '../../../../styles'
+import { ReadMoreLink, ReviewCardInfo } from './styles'
+
+import ReviewReactionsComponent from '../ReviewReactions'
 import UserCardHeader from '../../Users/UserCard/UserCardHeader'
-import {
-  ReviewCardInfo,
-  ReviewComment,
-  ReviewLike,
-  ReviewReactions,
-} from './styles'
+import truncateText from '../../../../utils/useTruncate'
 import ReviewComments from '../ReviewComments'
 
+
 function ReviewCard({ review, user }) {
+  const maxLength = 50
+  const readMoreLink = `/search/restaurant/${review.restaurant.id}`
+  const truncatedText = truncateText(review.text_content, maxLength)
+  const isTextTruncated = review.text_content.length > maxLength
+
   return (
     <DivWithLine>
       <BaseArticle>
@@ -20,13 +24,15 @@ function ReviewCard({ review, user }) {
         />
         <ReviewCardInfo>
           <h3>{review.restaurant.name}</h3>
-          <ReviewReactions>
-            <ReviewLike>
-              <i className="lar la-heart"></i> Like{' '}
-              {review.count_likes > 0 ? review.count_likes : null}
-            </ReviewLike>
-            <ReviewComment>Comments</ReviewComment>
-          </ReviewReactions>
+          <p>
+            {truncatedText}
+            {isTextTruncated && (
+              <ReadMoreLink to={readMoreLink}>
+                Read more <i className="las la-long-arrow-alt-right"></i>
+              </ReadMoreLink>
+            )}
+          </p>
+          <ReviewReactionsComponent countLikes={review.count_likes} />
 
           <h4>Last comments</h4>
           <ReviewComments reviewId={review.id} />

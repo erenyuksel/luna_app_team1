@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchRestaurants } from '../../../store/slices/restaurantsSlice';
 import { GridContainer } from "../../../styles"
