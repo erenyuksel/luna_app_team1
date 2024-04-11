@@ -11,7 +11,7 @@ export const HeaderContainer = styled.header`
   background-color: white;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
   gap: 3rem;
-  
+
   @media (max-width: 788px) {
     padding: 1rem 2rem;
   }
@@ -111,6 +111,19 @@ export const NavLeftButton = styled(LinkLikeButton)`
 export const NavRightButton = styled(LinkLikeButton)`
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+`
+
+export const LogoutButton = styled(LinkLikeButton)`
+  line-height: 1;
+  background-color: var(--white);
+  color: var(--orange);
+  &:focus-visible {
+    color: var(--orange);
+  }
+
+  &:focus {
+    color: var(--orange);
+  }
 `
 
 export const Avatar = styled.img`
