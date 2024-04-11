@@ -17,6 +17,7 @@ def code_generator(length=5):
 class RegistrationProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='registration_profile')
     code = models.CharField(max_length=5, unique=True, default=code_generator)
+    reset_password_code = models.CharField(max_length=5, blank=True)
 
     def __str__(self):
         return (f'username: {self.user.username}, generated code: {self.code}')

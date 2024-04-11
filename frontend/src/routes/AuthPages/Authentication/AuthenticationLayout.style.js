@@ -6,7 +6,6 @@ export const SignInHeader = styled.header`
   align-items: center;
   width: 100%;
   max-width: 50rem;
-  border: 1px red solid;
   gap: 2rem;
   font-size: 0.8rem;
 
@@ -53,6 +52,53 @@ export const AuthForm = styled.form`
     max-width: 100%;
   }
 `
+export const AuthFormGrid = styled.form`
+  width: 100%;
+  max-width: 50rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .input-container {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .form-footer {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+`
+
+export const CenterIt = styled.div`
+  display: flex;
+  height: 7rem;
+  width: 50rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 100%;
+  }
+`
 
 export const InputFieldContainer = styled.div`
   width: 20rem;
@@ -72,6 +118,10 @@ export const InputFieldContainer = styled.div`
     img {
       width: 1.5rem;
       height: 1.5rem;
+    }
+
+    ::placeholder {
+      color:rgb(169, 169, 172);
     }
 
     input {

@@ -1,24 +1,40 @@
 import React, { useState } from 'react'
-import { DivWithBottomLine, SectionContainer, SimpleButton } from '../../../styles'
-import { useNavigate } from 'react-router-dom'
+import {
+  DivWithBottomLine,
+  SectionContainer,
+  SimpleButton,
+} from '../../../styles'
+import { Link, useNavigate } from 'react-router-dom'
+import {
+  AuthForm,
+  AuthFormContainer,
+  CenterIt,
+  ErrorMessage,
+  InputFieldContainer,
+} from '../Authentication/AuthenticationLayout.style'
+import CreateAccountProgress from '../AccountProgress/CreateAccountProgress'
 import useApiRequest from '../../../axios/useApiRequest'
-import { AuthForm, AuthFormContainer, ErrorMessage, InputFieldContainer } from '../Login/AuthenticationLayout.style'
 
 const SignUp = () => {
-
   const [userEmail, setEmail] = useState('')
   const navigate = useNavigate()
-  const { sendRequest, error, data } = useApiRequest()
 
-  const handleSignUpClick = async(e) => {
+  const handleSignUpClick = async (e) => {
     e.preventDefault()
-    sendRequest('post', 'auth/registration/', {email: userEmail})
+    try {
+      const res = await useApiRequest.post('/users/registration/', {
+        email: userEmail,
+      })
+      navigate('/signup/congratulations')
+    } catch (errors) {
+      console.log(errors)
+    }
   }
 
-  if (data === 'success') {
-    localStorage.setItem('registered_email', userEmail)
-    navigate('/congratulation')
-  }
+  // if (data === 'success') {
+  //   localStorage.setItem('registered_email', userEmail)
+  //   navigate('/congratulations')
+  // }
 
   return (
     <>
@@ -26,10 +42,11 @@ const SignUp = () => {
         <AuthFormContainer>
           <AuthForm>
             <div className={'input-container'}>
-              <DivWithBottomLine>REGISTRATION</DivWithBottomLine>
+              <CenterIt>
+                <DivWithBottomLine>REGISTRATION</DivWithBottomLine>
+              </CenterIt>
               <InputFieldContainer>
                 <div className={'input-wrapper'}>
-                  {/* <img src={LetterIcon}></img> */}
                   <input
                     placeholder="Email"
                     type="email"
@@ -37,13 +54,13 @@ const SignUp = () => {
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
-                {error?.email && <ErrorMessage>{error.email}</ErrorMessage>}
+                {/* {error?.email && <ErrorMessage>{error.email}</ErrorMessage>} */}
               </InputFieldContainer>
-              {error?.detail && <ErrorMessage>{error.detail}</ErrorMessage>}
+              {/* {error?.detail && <ErrorMessage>{error.detail}</ErrorMessage>} */}
             </div>
             <div>
               <SimpleButton onClick={handleSignUpClick}>Register</SimpleButton>
-              {/* <CreateAccountProgress step={1}/> */}
+              <CreateAccountProgress step={1} />
             </div>
           </AuthForm>
         </AuthFormContainer>

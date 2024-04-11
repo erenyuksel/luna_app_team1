@@ -1,45 +1,74 @@
-import { useState } from "react"
-import axios from "axios";
+import axios from 'axios'
+// import { useState } from 'react'
 
-const useApiRequest = (options = { auth: true }) => {
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+// const BASE_URL =
+//   window.location.hostname === 'localhost'
+//     ? 'http://localhost:8000/backend/api'
+//     : 'https://luna1.propulsion-learn.ch/backend/api'
 
-    axios.defaults.baseURL = "https://luna1.propulsion-learn.ch/backend/api/";
+const useApiRequest = axios.create({
+  // baseURL: BASE_URL,
+  baseURL: 'https://luna1.propulsion-learn.ch/backend/api',
+})
 
-    const sendRequest = (method, url, requestData, isFormData) => {
-        setLoading(true);
-        setData(null);
-        setError(null);
-        axios.defaults.headers.common['Content-Type'] = isFormData
-            ? "multipart/form-data"
-            : "application/json";
+export const getMyProfileData = async (token) => {
+  return await useApiRequest.get('/users/get/me/', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+}
 
-        if (options.auth === true) {
-            console.log("going to set the AUTH");
-            axios.defaults.headers.common["Authorization"] =
-                "Bearer" + localStorage.getItem("auth-token");
-        } else {
-            axios.defaults.headers.common["Authorization"] = undefined;
-        }
+// const useApiRequest = (options = { auth: true }) => {
+//   const [data, setData] = useState(null)
+//   const [loading, setLoading] = useState(false)
+//   const [error, setError] = useState(null)
 
-        axios({method, url, data: requestData})
-            .then((response) => {
-                if (response.status >= 200 && response.status < 300) {
-                    if (Object.keys(response.data).length === 0) {
-                        return setData("success");
-                    } else {
-                        return setData(response.data)
-                    }
-                }
-            })
-            .catch((error) => {
-                setError(error.response.data);
-            })
-            .finally(() => setLoading(false));
-    }; 
-    return { sendRequest, data, error, loading};
-};
+//   axios.defaults.baseURL = 'http://localhost:8000/backend/api'
 
-export default useApiRequest;
+//   const sendRequest = (method, url, requestData, options = {}) => {
+//     setLoading(true)
+//     setData(null)
+//     setError(null)
+
+//     axios.defaults.headers.common['Content-Type'] = options.isFormData
+//       ? 'multipart/form-data'
+//       : 'application/json'
+
+//     if (options.auth === true) {
+//       axios.defaults.headers.common['Authorization'] =
+//         'Bearer ' + localStorage.getItem('auth-token')
+//     } else {
+//       axios.defaults.headers.common['Authorization'] = undefined
+//     }
+
+//     return axios({
+//       method,
+//       url,
+//       data: requestData,
+//       headers: options.headers,
+//       params: options.params,
+//     })
+//       .then((response) => {
+//         if (response.status >= 200 && response.status < 300) {
+//           if (Object.keys(response.data).length === 0) {
+//             return 'success'
+//           } else {
+//             return response.data
+//           }
+//         }
+//       })
+//       .catch((error) => {
+//         if (error.response) {
+//           return Promise.reject(error.response.data)
+//         } else {
+//           return Promise.reject({ detail: 'An unexpected error occurred.' })
+//         }
+//       })
+//       .finally(() => setLoading(false))
+//   }
+
+//   return { sendRequest, data, error, loading }
+// }
+
+export default useApiRequest

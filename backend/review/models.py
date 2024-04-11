@@ -16,12 +16,16 @@ RATING_CHOICES = {
 
 class Review(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name='reviews')
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='reviews')
     rating_stars = models.IntegerField(choices=RATING_CHOICES, blank=False)
     text_content = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     likes = models.ManyToManyField(User, verbose_name='likes', related_name='liked_reviews', blank=True)
 
+    @property
+    def count_likes(self):
+        return self.likes.count()
+
     def __str__(self):
-        return f"Review for {self.restaurant.name} by {self.user.name}"
+        return f"Review for {self.restaurant.name} by {self.user.username}"

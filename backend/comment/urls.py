@@ -1,9 +1,10 @@
 from django.urls import path
-from comment.views import CommentListCreateView, DeleteCommentView
+from comment.views import DeleteCommentView, CommentCreateView, UserCommentListView, SpecificReviewCommentView
 
 urlpatterns = [
-    path('review/comment/<int:user_id>/', CommentListCreateView.as_view(), name='comment-list'),
-    path('review/comment/new/<int:review_id>/', CommentListCreateView.as_view(), name='comment-create'),
-    path('review/comment/<int:comment_id>/', DeleteCommentView.as_view(), name='delete-comment')
+    path('review/comment/user/<int:user_id>/', UserCommentListView.as_view(), name='comment-list'),
+    path('review/comment/new/<int:review_id>/', CommentCreateView.as_view(), name='comment-create'),
+    path('review/comment/<int:pk>/', DeleteCommentView.as_view(), name='delete-comment'),
+    path('review/comment/review/<int:pk>/', SpecificReviewCommentView.as_view(), name='get specific review comments')
 
 ]

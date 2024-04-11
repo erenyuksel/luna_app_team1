@@ -1,11 +1,16 @@
-import React from 'react'
-import { SectionContainer } from '../../styles'
+import { MainContainer, SectionContainer } from '../../styles'
+import { Outlet } from 'react-router-dom'
+
+import CatMenu from './CatMenu'
 
 function Search() {
   return (
-    <SectionContainer>
-      <h1>Search Page</h1>
-    </SectionContainer>
+    <MainContainer>
+      <CatMenu />
+      <SectionContainer>
+        <Outlet />
+      </SectionContainer>
+    </MainContainer>
   )
 }
 
