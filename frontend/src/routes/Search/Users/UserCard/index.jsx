@@ -8,11 +8,12 @@ function UserCard({ user }) {
     <DivWithLine>
       <BaseArticle>
         <UserCardHeader
-          url={user.photoUrl}
-          userName={user.name}
-          reviews={user.reviewsCount}
+          url={user.profile_picture}
+          firstname={user.first_name}
+          lastname={user.last_name}
+          reviews={user.total_review}
         />
-        <UserCardInfo>{user.about}</UserCardInfo>
+        <UserCardInfo>{user.description}</UserCardInfo>
       </BaseArticle>
     </DivWithLine>
   )
