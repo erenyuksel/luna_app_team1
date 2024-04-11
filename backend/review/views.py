@@ -55,8 +55,6 @@ class ListReviewsUserView(ListAPIView):
     serializer_class = ReviewSerializer
     permission_classes = []
 
-    # lookup_url_kwarg = "user_id"
-
     def get_queryset(self):
         user_id = self.kwargs.get("user_id")
         return Review.objects.filter(user__id=user_id).order_by("-date_created")
