@@ -39,5 +39,9 @@ class User(AbstractUser):
     def total_review(self):
         return self.reviews.count()
 
+    @property
+    def total_comments(self):
+        return self.comments.count()
+
     def __str__(self):
         return self.username
