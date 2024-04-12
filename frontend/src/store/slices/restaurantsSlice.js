@@ -14,7 +14,6 @@ export const fetchRestaurants = createAsyncThunk(
 );
 
 export const selectRestaurantById = (state, restId) => {
-  console.log(state.restaurants.restaurants)
   return state.restaurants.restaurants.find(restaurant => restaurant.id === Number(restId));
 };
 
