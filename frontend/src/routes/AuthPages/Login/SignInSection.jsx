@@ -36,11 +36,13 @@ const Login = () => {
         password,
       })
       const token = res.data.access
-      navigate('/profile/:userid/')
+
       dispatch(loginUser(token))
       window.localStorage.setItem('token', token)
       const user = await getMyProfileData(token)
-      dispatch(userObject(user.data))
+      console.log(user.data[0].id)
+      dispatch(userObject(user.data[0]))
+      navigate(`/profile/${user.data[0].id}/`)
     } catch (errors) {
       setError(errors.response.data.detail)
     } finally {
