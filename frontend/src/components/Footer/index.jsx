@@ -15,7 +15,7 @@ function Footer() {
     <FooterContainer>
       <FooterMainContainer>
         <FooterLinks>
-          <NavGroupLink to="/">
+          <NavGroupLink to="/aboutus">
             <NavItemText>About Us</NavItemText>
           </NavGroupLink>
 
