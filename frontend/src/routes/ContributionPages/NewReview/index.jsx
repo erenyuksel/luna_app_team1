@@ -1,12 +1,12 @@
+import { useState } from 'react';
+import { FaStar } from 'react-icons/fa';
+import { addNewReview } from '../../../axios/addNewReview';
 import {
   CenteredSectionContainer,
   MainContainer,
   SectionContainer,
   SimpleButton,
-} from '../../../styles'
-import { FaStar } from 'react-icons/fa'
-import { useState } from 'react'
-
+} from '../../../styles';
 import {
   SelectYourRating,
   StarsContainer,
@@ -15,49 +15,68 @@ import {
   FormContainer,
   ReviewCover,
   RestaurantInfo,
-} from './styles'
+} from './styles';
+
+
 
 const colors = {
-  orange: '#FFBA5A',
+  orange: '#FFD700',
   grey: '#a9a9a9',
-}
+};
 
 const NewReview = () => {
-  const [currentValue, setCurrentValue] = useState(0)
-  const [hoverValue, setHoverValue] = useState(undefined)
-  const [review, setReview] = useState('')
-  const [isReviewValid, setIsReviewValid] = useState(true)
+  const [currentValue, setCurrentValue] = useState(0);
+  const [hoverValue, setHoverValue] = useState(undefined);
+  const [review, setReview] = useState('');
+  const [isReviewValid, setIsReviewValid] = useState(true);
+ 
 
-  const stars = Array(5).fill(0)
+  const stars = Array(5).fill(0);
 
   const handleClick = (value) => {
-    setCurrentValue(value)
-  }
+    setCurrentValue(value);
+  };
 
   const handleMouseOver = (newHoverValue) => {
-    setHoverValue(newHoverValue)
-  }
+    setHoverValue(newHoverValue);
+  };
 
   const handleMouseLeave = () => {
-    setHoverValue(undefined)
-  }
+    setHoverValue(undefined);
+  };
 
   const handleReviewChange = (event) => {
-    setReview(event.target.value)
-    setIsReviewValid(event.target.value.length >= 50) // Update validity based on length of review
-  }
+    setReview(event.target.value);
+    setIsReviewValid(event.target.value.length >= 10);
+  };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    
     if (review.length === 0) {
-      alert('Please write a review before submitting.')
-      return
+      alert('Please write a review before submitting.');
+      return;
     }
     if (!isReviewValid) {
-      alert('Please write a review with at least 50 characters.')
-      return
+      alert('Please write a review with at least 10 characters.');
+      return;
     }
-    // Perform submission logic here
-  }
+
+    // Prepare data to send to the backend
+    const formData = {
+      rating_stars: currentValue,
+      text_content: review,
+    };
+
+    try {
+      // Call the function to send data to the backend
+      const response = await addNewReview(formData);
+      console.log('Review added successfully:', response);
+      //later we can navigate to a different page, or show message, that review added succesfully
+    } catch (error) {
+      console.error('Error adding new review:', error);
+      // later show user, that it's not submitted, should try again
+    }
+  };
 
   return (
     <MainContainer>
@@ -65,8 +84,8 @@ const NewReview = () => {
         <SectionContainer>
           <RestaurantInfo>
             <h2>Restaurant Name</h2>
-            <p>Restauran category?</p>
-            <div>Raiting with stars</div>
+            <p>Restaurant category?</p>
+            <div>Rating with stars</div>
           </RestaurantInfo>
         </SectionContainer>
       </ReviewCover>
@@ -77,7 +96,8 @@ const NewReview = () => {
               <FaStar
                 key={index}
                 size="1.8rem"
-                onClick={() => handleClick(index + 1)}
+                onClick={() => handleClick(index + 1)} 
+
                 onMouseOver={() => handleMouseOver(index + 1)}
                 onMouseLeave={handleMouseLeave}
                 color={
@@ -85,6 +105,7 @@ const NewReview = () => {
                     ? colors.orange
                     : colors.grey
                 }
+                
                 style={{ marginRight: 10, cursor: 'pointer' }}
               />
             ))}
@@ -96,7 +117,7 @@ const NewReview = () => {
             onChange={handleReviewChange}
           />
           {!isReviewValid && (
-            <ErrorMessage>Review must be at least 50 characters.</ErrorMessage>
+            <ErrorMessage>Review must be at least 10 characters.</ErrorMessage>
           )}
           <SimpleButton
             type="button"
@@ -104,11 +125,12 @@ const NewReview = () => {
             onClick={handleSubmit}
           >
             Submit
+            
           </SimpleButton>
         </FormContainer>
       </CenteredSectionContainer>
     </MainContainer>
-  )
-}
+  );
+};
 
-export default NewReview
+export default NewReview;
