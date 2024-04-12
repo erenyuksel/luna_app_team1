@@ -11,7 +11,6 @@ import SignUp from './AuthPages/SignUp/SignUpSection'
 import NewRestaurant from './ContributionPages/NewRestaurant'
 import NewReview from './ContributionPages/NewReview'
 import AboutUsPage from './AboutUs'
-
 import UserReviews from './Profile/Elements/UserReviews'
 import UserComments from './Profile/Elements/UserComments'
 import UserRestaurants from './Profile/Elements/UserRestaurants'
