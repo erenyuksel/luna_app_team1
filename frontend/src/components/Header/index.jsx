@@ -1,10 +1,15 @@
 import logoImage from '../../../public/rocket.png'
 import useLogout from '../../utils/useLogout'
-
-import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
-import { loginUser, logoutUser, userObject } from "../../store/slices/loggedInUser";
-import useApiRequest, { getMyProfileData } from "../../axios/useApiRequest";
+import { useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react'
+import {
+  loginUser,
+  logoutUser,
+  userObject,
+} from '../../store/slices/loggedInUser'
+import useApiRequest, { getMyProfileData } from '../../axios/useApiRequest'
 
 import {
   HeaderContainer,
@@ -20,36 +25,40 @@ import {
 } from './styles'
 
 const Header = () => {
-  const isLoggedIn = localStorage.getItem('token')
+  
   const logout = useLogout()
   const dispatch = useDispatch()
-  const [isLoading, setIsLoading] = useState(false);
-  const [user, setUser] = useState('')
-
+  const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
+  const logedInUser = useSelector((store) => store.loggedInUser.user)
+  const isLoggedIn = useSelector((store) => store.loggedInUser.logedIn)
+  // console.log(logedInUser.id)
+  const [user, setUser] = useState(logedInUser)
+  const token = useSelector((store) => store.loggedInUser.token)
   useEffect(() => {
-    console.log('main app')
-    const token = window.localStorage.getItem("token");
+    const token = window.localStorage.getItem('token')
 
     const verify = async () => {
-      setIsLoading(true);
+      setIsLoading(true)
 
       try {
-        await useApiRequest.post("/auth/token/verify/", { token: token});
-        dispatch(loginUser(token));
-        const user = await getMyProfileData(token);
+        await useApiRequest.post('/auth/token/verify/', { token: token })
+        dispatch(loginUser(token))
+        const user = await getMyProfileData(token)
         dispatch(userObject(user.data[0]))
         setUser(user.data[0])
       } catch (error) {
-        window.localStorage.removeItem("token");
-        dispatch(logoutUser());
+        window.localStorage.removeItem('token')
+        dispatch(logoutUser())
       } finally {
-        setIsLoading(false);
+        setIsLoading(false)
       }
-    };
-    token ? verify() : dispatch(logoutUser());
-  }, []);
+    }
+    token ? verify() : dispatch(logoutUser())
+  }, [token])
 
   const handleLogout = () => {
+    navigate('/')
     logout()
   }
 
@@ -70,7 +79,7 @@ const Header = () => {
         </NavGroupLink>
 
         {isLoggedIn ? (
-          <NavGroupLink to={`/profile/${user.id}`}>
+          <NavGroupLink to={`/profile/${logedInUser.id}`}>
             <NavItemText>Profile</NavItemText>
           </NavGroupLink>
         ) : (

@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import coverBg from '../../assets/images/luna-home-bg.png'
 
 // Styled components for the AboutUsPage
 const Container = styled.div`
@@ -17,22 +16,22 @@ const BackgroundOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: url(${coverBg}) center center/cover;
+  background: url('../src/assets/images/luna-home-bg.png') center center/cover;
   opacity: 0.5;
 `
 
 const Content = styled.div`
   position: relative;
   z-index: 1;
-  width: 70%;
-  padding: 2rem;
+  max-width: 800px;
+  padding: 40px;
   background-color: rgba(
     255,
     255,
     255,
     0.9
   ); /* Semi-transparent white background */
-  border-radius: 2rem;
+  border-radius: 20px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 `
 
