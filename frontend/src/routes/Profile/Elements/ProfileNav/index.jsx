@@ -38,7 +38,6 @@ const ProfileNav = (user) => {
           <i className="las la-user-edit"></i> Edit Profile
         </Link>
       </StyledLi>) : <div></div>}
-      <Link to={`/profile/2`}>user 2</Link>
      
     </StyledUl>
   )
