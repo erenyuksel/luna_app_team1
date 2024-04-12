@@ -1,9 +1,11 @@
 import { Link, useLocation } from 'react-router-dom'
 import { StyledLi, StyledUl } from './styles'
+import { useSelector } from 'react-redux'
 
 const ProfileNav = (user) => {
   const location = useLocation()
   const isActive = (pathname) => location.pathname.includes(pathname)
+  const logedInUser = useSelector((store) => store.loggedInUser.user)
 
   return (
     <StyledUl>
@@ -31,11 +33,13 @@ const ProfileNav = (user) => {
           <i className="las la-hamburger"></i> Restaurants
         </Link>
       </StyledLi>
-      <StyledLi isActive={isActive(`/profile/${user.user.id}/edit`)}>
+      {user.user.id === logedInUser.id ? ( <StyledLi isActive={isActive(`/profile/${user.user.id}/edit`)}>
         <Link to={`/profile/${user.user.id}/edit`}>
           <i className="las la-user-edit"></i> Edit Profile
         </Link>
-      </StyledLi>
+      </StyledLi>) : <div></div>}
+      <Link to={`/profile/2`}>user 2</Link>
+     
     </StyledUl>
   )
 }
