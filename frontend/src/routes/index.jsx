@@ -49,7 +49,7 @@ const Router = () => {
             />
             <Route path="/profile/:user_id/edit" element={<EditProfile />} />
           </Route>
-          <Route path="/add/review" element={<NewReview />} />
+          <Route path="/add/review/:restId" element={<NewReview />} />
           <Route path="/add/restaurant" element={<NewRestaurant />} />
           {/* </Route> */}
           <Route path="/login" element={<Login />} />

@@ -22,6 +22,7 @@ import {
   RestaurantReviewsContainer,
   ReviewsAndCommentsContainer,
 } from './styles'
+import { LinkLikeButton } from '../../../../components/Header/styles'
 import { RestaurantInfo } from '../../../ContributionPages/NewReview/styles'
 import RatingStars from '../../../../components/SmallElements/RatingStars'
 import RestaurantReviewCard from './RestReviewCard'
@@ -44,8 +45,6 @@ const RestauranPage = () => {
     }
     dispatch(fetchReviewsByRestaurantId(restId))
   }, [restId, dispatch, restaurant, restaurantStatus])
-
-  console.log(reviews)
 
   if (restaurantStatus === 'loading' || reviewsStatus === 'loading') {
     return <Loading />
@@ -112,8 +111,12 @@ const RestauranPage = () => {
           </PrincipalInfo>
 
           <PrincipalInfoButtons>
-            <SimpleButton>Write a Review</SimpleButton>
-            <SimpleButton>Edit Data</SimpleButton>
+            <LinkLikeButton
+              to={`/add/review/${restaurant.id}`}
+            >
+              Write a Review
+            </LinkLikeButton>
+            <LinkLikeButton>Edit Data</LinkLikeButton>
           </PrincipalInfoButtons>
         </RestaurantPrincipalInfos>
       </RestaurantGridContainer>

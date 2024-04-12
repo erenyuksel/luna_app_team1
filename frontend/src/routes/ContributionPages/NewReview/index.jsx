@@ -1,12 +1,13 @@
+import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { FaStar } from 'react-icons/fa'
+import { addNewReview } from '../../../axios/addNewReview'
 import {
   CenteredSectionContainer,
   MainContainer,
   SectionContainer,
   SimpleButton,
 } from '../../../styles'
-import { FaStar } from 'react-icons/fa'
-import { useState } from 'react'
-
 import {
   SelectYourRating,
   StarsContainer,
@@ -17,46 +18,39 @@ import {
   RestaurantInfo,
 } from './styles'
 
-const colors = {
-  orange: '#FFBA5A',
-  grey: '#a9a9a9',
-}
+const colors = { orange: '#FFD700', grey: '#a9a9a9' }
 
 const NewReview = () => {
+  const { restId } = useParams() // Get restId from URL
   const [currentValue, setCurrentValue] = useState(0)
   const [hoverValue, setHoverValue] = useState(undefined)
   const [review, setReview] = useState('')
   const [isReviewValid, setIsReviewValid] = useState(true)
-
   const stars = Array(5).fill(0)
 
-  const handleClick = (value) => {
-    setCurrentValue(value)
-  }
-
-  const handleMouseOver = (newHoverValue) => {
-    setHoverValue(newHoverValue)
-  }
-
-  const handleMouseLeave = () => {
-    setHoverValue(undefined)
-  }
-
+  const handleClick = (value) => setCurrentValue(value)
+  const handleMouseOver = (newHoverValue) => setHoverValue(newHoverValue)
+  const handleMouseLeave = () => setHoverValue(undefined)
   const handleReviewChange = (event) => {
-    setReview(event.target.value)
-    setIsReviewValid(event.target.value.length >= 50) // Update validity based on length of review
+    const text = event.target.value
+    setReview(text)
+    setIsReviewValid(text.length >= 10)
   }
-
-  const handleSubmit = () => {
-    if (review.length === 0) {
-      alert('Please write a review before submitting.')
-      return
-    }
+  const handleSubmit = async () => {
     if (!isReviewValid) {
-      alert('Please write a review with at least 50 characters.')
+      alert('Please write a review with at least 10 characters.')
       return
     }
-    // Perform submission logic here
+    const formData = { rating_stars: currentValue, text_content: review }
+    try {
+      const response = await addNewReview(restId, formData)
+      console.log('Review added successfully:', response)
+      setCurrentValue(0)
+      setReview('')
+      setIsReviewValid(true)
+    } catch (error) {
+      console.error('Error adding new review:', error)
+    }
   }
 
   return (
@@ -64,9 +58,9 @@ const NewReview = () => {
       <ReviewCover>
         <SectionContainer>
           <RestaurantInfo>
-            <h2>Restaurant Name</h2>
-            <p>Restauran category?</p>
-            <div>Raiting with stars</div>
+            {/* <h2>{restaurant.name}</h2> */}
+            <p>Restaurant category?</p>
+            <div>Rating with stars</div>
           </RestaurantInfo>
         </SectionContainer>
       </ReviewCover>
@@ -91,7 +85,7 @@ const NewReview = () => {
             <SelectYourRating>Select your Rating</SelectYourRating>
           </StarsContainer>
           <Textarea
-            placeholder="Your review helps others learn about great local businesses. Please don't review this business if you received a freebie for writing this review, or if you're connected in any way to the owner or employees."
+            placeholder="Your review helps others learn about great local businesses..."
             value={review}
             onChange={handleReviewChange}
           />

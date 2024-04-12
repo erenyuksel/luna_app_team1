@@ -1,10 +1,14 @@
 import useApiRequest from "./useApiRequest";
 
-export const addNewReview = async (formData) => {
+export const addNewReview = async (restId, formData) => {
+    const token = localStorage.getItem('token')
+    // const token = localStorage.getItem('auth-token')
+
     try {
-        const response = await useApiRequest.post('/reviews/new/2/', formData, { // 2 is for try, will add {id} later
+        const response = await useApiRequest.post(`/reviews/new/${restId}/`, formData, {
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` 
             },
         });
         return response.data;
