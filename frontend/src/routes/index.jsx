@@ -10,6 +10,7 @@ import Login from './AuthPages/Login/SignInSection'
 import SignUp from './AuthPages/SignUp/SignUpSection'
 import NewRestaurant from './ContributionPages/NewRestaurant'
 import NewReview from './ContributionPages/NewReview'
+import AboutUsPage from './AboutUs'
 import UserReviews from './Profile/Elements/UserReviews'
 import UserComments from './Profile/Elements/UserComments'
 import UserRestaurants from './Profile/Elements/UserRestaurants'
@@ -52,6 +53,8 @@ const Router = () => {
           <Route path="/add/restaurant" element={<NewRestaurant />} />
           {/* </Route> */}
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/aboutus" element={<AboutUsPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
