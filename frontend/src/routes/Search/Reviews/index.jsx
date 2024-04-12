@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchReviews } from '../../../store/slices/reviewsSlice'
 import { GridContainer } from '../../../styles'
 import ReviewCard from './ReviewCard'
+import Loading from '../../../components/SmallElements/Loading'
 
 function ReviewsList() {
   const dispatch = useDispatch()
@@ -14,7 +15,7 @@ function ReviewsList() {
 
   console.log(reviews)
 
-  if (status === 'loading') return <div>Loading...</div>
+  if (status === 'loading') return <Loading />
   if (error) return <div>Error: {error}</div>
 
   return (
