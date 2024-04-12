@@ -32,7 +32,7 @@ function Profile() {
       } 
     };
     getUser()
-  }, []);
+  }, [user_id]);
 
 
   return (
