@@ -5,50 +5,69 @@ import {
   fetchRestaurants,
   selectRestaurantById,
 } from '../../../../store/slices/restaurantsSlice'
-import { MainContainer, SectionContainer } from '../../../../styles'
-import { RestaurantCover } from './styles'
+import { fetchReviewsByRestaurantId } from '../../../../store/slices/reviewsSlice'
+import {
+  MainContainer,
+  SectionContainer,
+  SimpleButton,
+} from '../../../../styles'
+import {
+  FilterForm,
+  FilterInput,
+  PrincipalInfo,
+  PrincipalInfoButtons,
+  RestaurantCover,
+  RestaurantGridContainer,
+  RestaurantPrincipalInfos,
+  RestaurantReviewsContainer,
+  ReviewsAndCommentsContainer,
+} from './styles'
 import { RestaurantInfo } from '../../../ContributionPages/NewReview/styles'
 import RatingStars from '../../../../components/SmallElements/RatingStars'
+import RestaurantReviewCard from './RestReviewCard'
+import Loading from '../../../../components/SmallElements/Loading'
+import NotFound from '../../../NotFound'
 
 const RestauranPage = () => {
-  let { restId } = useParams()
+  const { restId } = useParams()
   const dispatch = useDispatch()
   const restaurant = useSelector((state) => selectRestaurantById(state, restId))
-  const { status } = useSelector((state) => state.restaurants)
-
-  console.log(restaurant)
+  const reviews = useSelector((state) => state.reviews.reviews)
+  const reviewsStatus = useSelector((state) => state.reviews.status)
+  const { status: restaurantStatus, error: restaurantError } = useSelector(
+    (state) => state.restaurants,
+  )
 
   useEffect(() => {
-    if (!restaurant && status !== 'loading') {
-      dispatch(fetchRestaurants(restId))
+    if (!restaurant && restaurantStatus !== 'loading') {
+      dispatch(fetchRestaurants())
     }
-  }, [restId, dispatch, restaurant, status])
+    dispatch(fetchReviewsByRestaurantId(restId))
+  }, [restId, dispatch, restaurant, restaurantStatus])
 
-  if (status === 'loading')
-    return (
-      <MainContainer>
-        <SectionContainer>
-          <p>Loading...</p>
-        </SectionContainer>
-      </MainContainer>
-    )
-  if (status === 'failed')
-    return (
-      <MainContainer>
-        <SectionContainer>
-          <p>Error loading the restaurant details.</p>
-        </SectionContainer>
-      </MainContainer>
-    )
+  console.log(reviews)
 
-  if (!restaurant)
+  if (restaurantStatus === 'loading' || reviewsStatus === 'loading') {
+    return <Loading />
+  }
+
+  if (restaurantStatus === 'failed' || reviewsStatus === 'failed') {
     return (
       <MainContainer>
         <SectionContainer>
-          <p>Restaurant not found.</p>
+          <p>Error loading the restaurant details: {restaurantError}</p>
+          <p>
+            Error loading reviews:
+            {reviewsStatus === 'failed' ? 'Failed to load reviews' : ''}
+          </p>
         </SectionContainer>
       </MainContainer>
     )
+  }
+
+  if (!restaurant) {
+    return <NotFound />
+  }
 
   return (
     <MainContainer>
@@ -61,7 +80,43 @@ const RestauranPage = () => {
           </RestaurantInfo>
         </SectionContainer>
       </RestaurantCover>
-      <SectionContainer></SectionContainer>
+      <RestaurantGridContainer>
+        <ReviewsAndCommentsContainer>
+          <FilterForm>
+            <FilterInput
+              name="filter"
+              id="filter"
+              placeholder="Filter list..."
+            />
+            <SimpleButton>Filter</SimpleButton>
+          </FilterForm>
+          <RestaurantReviewsContainer>
+            {reviews.map((review) => {
+              return (
+                <RestaurantReviewCard
+                  key={review.id}
+                  review={review}
+                  user={review.user}
+                />
+              )
+            })}
+          </RestaurantReviewsContainer>
+        </ReviewsAndCommentsContainer>
+        <RestaurantPrincipalInfos>
+          <PrincipalInfo>
+            <i className="lar la-clock"></i> <p>{restaurant.opening_hours}</p>
+          </PrincipalInfo>
+          <PrincipalInfo>
+            <i className="las la-money-bill-wave"></i>
+            <p>Price level: {restaurant.price_level_display}</p>
+          </PrincipalInfo>
+
+          <PrincipalInfoButtons>
+            <SimpleButton>Write a Review</SimpleButton>
+            <SimpleButton>Edit Data</SimpleButton>
+          </PrincipalInfoButtons>
+        </RestaurantPrincipalInfos>
+      </RestaurantGridContainer>
     </MainContainer>
   )
 }

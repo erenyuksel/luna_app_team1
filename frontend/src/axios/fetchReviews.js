@@ -9,3 +9,13 @@ export const fetchReviewsApi = async () => {
         throw error;
     }
 };
+
+export const fetchReviewsByRestaurantId = async (restId) => {
+    try {
+        const response = await useApiRequest.get(`/reviews/restaurant/${restId}/`);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching reviews:", error);
+        throw error;
+    }
+};
