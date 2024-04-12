@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { SimpleButton } from '../../../../styles'
 import { SectionTitle, UserGridContainer, UserSection } from '../../styles'
-import { EditProfileStyle } from './Edit.style'
+import { DeleteButton, EditProfileStyle } from './Edit.style'
 import { DeleteAccountStyle } from './Edit.style'
+import { fetchDeleteProfile, fetchEditProfile } from '../../../../axios/fetchEditProfile'
 
 
 
@@ -17,15 +18,35 @@ function EditProfile() {
     thingsILove: '',
     description: '',
   })
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // logic to save form data
-    console.log(formData)
+    try {
+      setIsLoading(true);
+      const updatedProfile = await fetchEditProfile(formData);
+      setFormData(updatedProfile);
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setIsLoading(false)
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    try {
+      setIsLoading(true)
+      await fetchDeleteProfile(user_id)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -98,8 +119,8 @@ function EditProfile() {
         </div>
         <div className="input-group">
           <label htmlFor="thingsILove">Things I love</label>
-          <input
-            type="text"
+          <textarea
+            className='textarea-input'
             id="thingsILove"
             name="thingsILove"
             value={formData.thingsILove}
@@ -108,8 +129,8 @@ function EditProfile() {
         </div>
         <div className="input-group">
           <label htmlFor="description">Description</label>
-          <input
-            type="text"
+          <textarea
+            className='textarea-input'
             id="description"
             name="description"
             value={formData.description}
@@ -118,9 +139,10 @@ function EditProfile() {
         </div>
       </EditProfileStyle>
       <DeleteAccountStyle>
-        <SimpleButton type="submit">Save</SimpleButton>
-        <p>Delete account</p>
-        {/* <DeleteAccount></DeleteAccount> */}
+        <SimpleButton type="submit" onClick={handleSubmit}>
+          {isLoading ? 'Saving...' : 'Save'}
+          </SimpleButton>
+        <DeleteButton type='submit' onClick={handleDeleteAccount}>{isLoading ? 'Deleting...' : 'Delete account'}</DeleteButton>
       </DeleteAccountStyle>
     </UserSection>
   )
