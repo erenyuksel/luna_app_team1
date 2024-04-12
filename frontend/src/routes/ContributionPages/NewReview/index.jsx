@@ -96,7 +96,8 @@ const NewReview = () => {
               <FaStar
                 key={index}
                 size="1.8rem"
-                onClick={() => handleClick(index + 1)}
+                onClick={() => handleClick(index + 1)} 
+
                 onMouseOver={() => handleMouseOver(index + 1)}
                 onMouseLeave={handleMouseLeave}
                 color={
@@ -104,6 +105,7 @@ const NewReview = () => {
                     ? colors.orange
                     : colors.grey
                 }
+                
                 style={{ marginRight: 10, cursor: 'pointer' }}
               />
             ))}
@@ -123,6 +125,7 @@ const NewReview = () => {
             onClick={handleSubmit}
           >
             Submit
+            
           </SimpleButton>
         </FormContainer>
       </CenteredSectionContainer>
